@@ -3,7 +3,7 @@ session_start();
 include "../login/db_conn.php";
 
 if(!(isset($_SESSION["idUser"]) && $_SESSION["idUser"] != "guest")){
-  header("location: ../home/index.php");
+  header("location: ../main-blog/home/index.php");
   exit();
 } else {
   $id = $_SESSION['idUser'];

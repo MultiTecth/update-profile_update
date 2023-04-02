@@ -38,12 +38,24 @@ if (isset($_POST['uname']) && isset($_POST['pw'])){
         $_SESSION['user_name'] = $row['user_name'];
         $_SESSION['name'] = $row['name'];
         $_SESSION['id'] = $row['id'];
-
+        $_SESSION['bio'] = $row['bio'];
+        $_SESSION['st'] = $row['st'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['gender'] = $row['gender'];
         
+        $_SESSION['img'] = $row['profile_picture'];
+        
+        $encoded_image = base64_encode($row["profile_picture"]);
+        $_SESSION['hinh'] = $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=''";
 
+        if($row['st'] == 'a'){
+          header("Location: ../dbphp/home/");
+          exit();
+        } else {
+          header("Location: ../main-blog/home/index.php");
+          exit();
+        }
 
-        header("Location: ../home/index.php");
-        exit();
       }
       else {
         header("Location: index.php?error=Incorect username or password");

@@ -3,6 +3,8 @@ session_start();
 
 
 $dir = substr($_SESSION['direc'], 1);
+
+// jika yang mengunjungi itu belum login (guest)
 if(!(isset($_SESSION['user_name']) && isset($_SESSION['name']) && isset($_SESSION['id']))){
   $_SESSION['user_name'] = "guest";
   $_SESSION['name'] = "guest";
@@ -24,23 +26,25 @@ if(mysqli_num_rows($result) === 1){
     $_SESSION['read_uname'] = $row['user_name'];
     $_SESSION['read_name'] = $row['name'];
     $_SESSION['read_id'] = $row['id'];
-    $_SESSION['read'] = True;
-    // sleep(3);
-    // echo $_SESSION['read_uname'];
+    $_SESSION['read_email'] = $row['email'];
+    $_SESSION['read_bio'] = $row['bio'];
+    $_SESSION['read_gender'] = $row['gender'];
+    // $_SESSION['read_profile_picture'] = $row['profile_picture'];
+    $_SESSION['read_st'] = $row['st'];
     header("Location: @".$_SESSION['read_name']."/index.php");
     exit();
   }
   else {
     if(isset($uname)){  
       if($uname == "guest"){
-        header("location: ../home/index.php?error=akun tidak ditemukan");
+        header("location: ../main-blog/home/index.php?error=akun tidak ditemukan");
         exit();
       } else {
         header("Location: @".$uname."/index.php?error=ada masalah pada akun");
         exit();
       }
     } else {
-      header("location: ../home/index.php?error=akun tidak ditemukan");
+      header("location: ../main-blog/home/index.php?error=akun tidak ditemukan");
       exit();
     }
   }

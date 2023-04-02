@@ -1,0 +1,15 @@
+img {
+  max-width: 100px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  padding: 30px;
+  font-size: 30px;
+}
+.caption {
+  flex-direction: column;
+  display: flex;
+}

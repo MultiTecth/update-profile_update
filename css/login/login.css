@@ -13,8 +13,12 @@ a {
 body {
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 100vh;
   background-image: linear-gradient(#000712, #275fb2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
 }
 .container {
   display: flex;
@@ -29,9 +33,11 @@ body {
   border-radius: 10px;
   /* border:2px solid  white; */
   background-color: #163d77;
+  position: relative;
 }
 .title {
-  margin-bottom: 5em;
+  margin-bottom: 4em;
+  margin-top: 20px;
 }
 .title h2 {
   text-align: center;
@@ -73,7 +79,9 @@ input {
     width: auto;
   }
 
-
+.btn_submit > * {
+  cursor:default;
+}
 
 .btn_submit .sub {
   margin: 20px auto 0;
@@ -92,6 +100,10 @@ input {
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.341);
 }
 
+.btn_submit a {
+  user-select: none;
+}
+
 .text {
     display: flex;
     align-items: center;
@@ -102,4 +114,11 @@ input {
 
 .textlog{
     color: white;
+}
+
+.arrow {
+  max-width: 37px;
+  position: absolute;
+  top: 34px;
+  left: 36px;
 }

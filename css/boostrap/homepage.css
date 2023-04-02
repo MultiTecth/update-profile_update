@@ -1,0 +1,206 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    list-style: none;
+}
+body{
+    background-image:linear-gradient(#275FB2,#001209);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+}
+.jmb-container img{
+    width:100%;
+    object-fit: cover;
+    height:250px;
+}
+
+.container-content{
+    color:white;
+    gap:10px;
+    padding: 10px;
+    display: grid;
+    /* border: 1px solid white; */
+    grid-template-columns: 400px auto 400px;
+    justify-content:space-between;
+    align-items: flex-start;
+}
+.left-content{
+    /* background-color:#3869AC; */
+    /* border: 1px solid rgb(0, 255, 76); */
+    padding: 10px;
+}
+.card-container-left .card{
+    margin: 10px;
+    padding:10px;
+    background-color: #275FB2;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content:flex-start;
+    align-items: center;
+    gap:20px;
+}
+.card-container-left img{
+    width: 70px;
+    border-radius: 50%;
+}
+.card-container-left .card .text{
+    font-size: 15px;
+    color:white;
+}
+.title h3{
+    letter-spacing:1px;
+    font-size:25px;
+    font-weight:400;
+    margin-left: 10px;
+}
+.content{
+    background-color:#3868ac84;
+    padding:10px;
+    height:100%;
+    border-radius:5px;
+}
+
+.center-content{
+    /* background-color:#3869AC; */
+    /* border: 1px solid rgb(0, 255, 76); */
+    padding: 10px;
+}
+.news{
+    background-color:#3868ac84;
+    padding:10px;
+    border-radius:5px;
+}
+.news .news-title h3{
+    letter-spacing:3px;
+    font-size:25px;
+    font-weight:400;
+}
+.news .news-title{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    justify-content:center;
+}
+.news .news-title .line{
+    float: right;
+    width: 85%;
+    height: 1px;
+    border: 1px solid #275FB2;
+}
+.card-container .card{
+    margin: 10px;
+    padding-right:20px;
+    background-color: #275FB2;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content:flex-start;
+    align-items: center;
+    gap:20px;
+}
+.card-container .card img{
+    border-radius: 5px;
+}
+.card-container .card p{
+    font-size: 22px;
+    color:white;
+}
+
+/* Novel */
+.novel{
+    margin-top: 20px;
+    /* background-color:#3868ac84; */
+    padding:10px;
+    /* border-radius:5px; */
+}
+.novel .novel-title h3{
+    letter-spacing:3px;
+    font-size:25px;
+    font-weight:400;
+}
+.novel .novel-title{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    justify-content:center;
+}
+.novel .novel-title .line{
+    float: right;
+    width: 85%;
+    height: 1px;
+    border: 1px solid #275FB2;
+}
+
+/* Short Story */
+.short-story{
+    margin-top: 20px;
+    /* background-color:#3868ac84; */
+    padding:10px;
+    /* border-radius:5px; */
+}
+.short-story .short-story-title h3{
+    letter-spacing:3px;
+    font-size:25px;
+    font-weight:400;
+}
+.short-story .short-story-title{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    justify-content:center;
+}
+.short-story .short-story-title .line{
+    float: right;
+    width: 75%;
+    height: 1px;
+    border: 1px solid #275FB2;
+}
+
+/* Right Content */
+.right-content{
+    /* background-color:#3869AC; */
+    /* border: 1px solid rgb(0, 255, 76); */
+    padding: 10px;
+}
+.card-container-right .card{
+    margin: 10px;
+    padding:5px;
+    background-color: #275FB2;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content:flex-start;
+    align-items: center;
+    gap:20px;
+    border-radius: 1px;
+    height: fit-content;
+}
+.card-container-right img{
+    width: 50px;
+    border-radius: 1px;
+    object-fit: cover;
+}
+.card-container-right .card p{
+    /* font-size: 15px; */
+    color:white;
+}
+.footer-bottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 10px; */
+    background:#001331;
+    width:100%;
+    height: 50px;
+    /* padding: 15px 0; */
+    text-align: center;
+    color: white;
+    position: absolute;
+    bottom: 0px;
+}
+
+.footer-bottom p{
+    font-weight: 200;
+}

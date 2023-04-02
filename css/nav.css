@@ -1,76 +1,159 @@
-nav {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  display: flex;
-  text-align: center;
-  justify-content: space-between;
-  /* align-items: center; */
-  /* border: 2px solid red; */
-  padding-top: 5px;
-  padding-bottom: 5px;
-  height: 50px;
-  background-color: #009688;
-  z-index: 999;
-}
-
-nav ul:nth-child(1){
-  width: 45%;
-}
-
-nav ul:nth-child(2){
-  width: 175px;
-}
-
-nav ul{
-  display: flex;
-  justify-content: space-evenly;
+.jumbotron .navbar{
+  /* height:70px; */
+  padding-left: 20px;
+  background-color:#001331;
+  /* border: 1px solid white; */
+  display:flex;
+  /* grid-template-columns: auto auto auto; */
+  justify-content:space-between;
   align-items: center;
-  text-align: center;
-  text-transform: capitalize;
+  /* row-gap: 20px; */
+  /* padding: 20px; */
 }
-ul.con-gambar a > * {
-  margin: 0 10px 0 10px;
+.jumbotron .navbar .nav-menu{
+  /* border: 1px solid white; */
+  display:flex;
+  justify-content: center;
+  /* grid-template-columns: auto auto; */
+  align-items: center;
+  /* object-position: center; */
 }
-.gambar img {
-  width: 50px;
-  height: 50px;
-  background-color: white;
-  border-radius: 50%;
-  margin: auto;
+.jumbotron .navbar .text{
+  border-right: 1px solid gray;
+  padding-right: 10px;
 }
-
-nav .menu > *, 
-nav .login-register > *  {
-  width: 100%;
-  height: 100%;
+.jumbotron .navbar .text h2{
+  font-size: 30px;
+  color:white;
+  letter-spacing:5px;
+  word-spacing:1px;
 }
-
-
-nav ul a {
-  display: flex;
+/* .jumbotron .navbar .text .line{
+  width: 10px;
+  height: 80px;
+  background-color: gray;
+  margin: 5.5px;
+  float:right;
+} */
+.jumbotron .navbar .list .ul-list{
+  display:grid;
+  grid-template-columns: auto auto auto;
+  gap:3em;
+  margin-top: 12px;
+  justify-content:center;
+  align-items: center;
+}
+.list .ul-list li a{
+  font-size: 20px;
+  color:white;
+  text-decoration: none;
+  /* list-style: none; */
+}
+.list .ul-list a:hover{
+  border-bottom: 1px solid white;
+  transition: 10s ease-in-out;
+}
+.dropdown-center .btn{
+  background-color:transparent;
+  border:none;
+}
+.dropdown-center .dropdown-menu{
+  background-color:rgba(16, 43, 85, 0.9);
+  width: 200px;
+  height: fit-content;
+}
+.dropdown-menu .dropdown-item{
+  border-bottom: 1px solid rgba(16, 42, 85, 0.985);;
+}
+.more-menu{
+  box-sizing: border-box;
+  display:grid;
+  grid-template-columns:auto auto;
+  gap:30px;
+  justify-content:center;
+  align-items: center;
+  /* border: 1px solid white; */
+}
+.more-menu-cnt{
+  display:grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
   justify-content: center;
   align-items: center;
-  text-decoration: none;
-  color: #eee;
-  /* border: 2px solid red; */
 }
-
-nav ul a:hover{
-  background-color: #1A9F93;
+.more-menu .search{
+  background-color:#022865;
+  border-radius: 5px;
+  /* padding:3px; */
 }
-
-.con-gambar {
-  text-transform: none !important;
+.more-menu .search img{
+  width: 35px;
+  padding: 5px;
+  margin-right:5px;
+  border-right: 1px solid #132845;
+  /* background-color: #012257; */
 }
-
-
-
-
-.container {
-  width: 900px;
-  height: 500px;
-  margin: 200px auto;
+.more-menu input[type=search]{
+  /* padding: 5px; */
+  width: 100px;
+  background-color:transparent;
+  border:none;
+  outline:none;
+}
+::placeholder{
+  color:white;
+}
+.more-menu .tweet-btn{
+  padding:5px;
+  border-radius:5px;
+  width: 140px;
+  border:none;
+  box-sizing: border-box;
+  background-color: #022865;
+  color:white;
+}
+.dropdown .btn{
+  border:none;
+}
+.profil .dropdown-menu{
+  width:fit-content;
+  background-color:rgba(16, 43, 85, 0.9);
+  position: absolute;
+  left: 1383px;
+  top: 320px;
+  transform: translate(-75%, 3%);
+}
+.profil .dropdown-menu .profil-picture{
+  color:white;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: flex-start;
+  align-items: center;
+  gap:20px;
+}
+.profil .dropdown-menu button{
+  width:320px;
+  height:66px;
+  padding: 15px;
+  border-radius: 5px;
+  color:white;
+  background-color: #193F7A;
+  border:none;
+  display:grid;
+  grid-template-columns:auto auto;
+  justify-content:flex-start;
+  align-items:center;
+  gap:1.5em;
+  font-size:1.3em;
+  letter-spacing:1.5px;
+}
+.profil .dropdown-menu button img{
+  width:40px;
+}
+.profil .dropdown-menu a{
+  text-decoration:none;
+}
+.profil .dropdown-menu button p{
+  font-size:20px;
 }

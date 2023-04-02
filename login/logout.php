@@ -4,6 +4,6 @@ session_start();
 session_unset();
 session_destroy();
 
-header("Location: ../home/index.php"); 
+header("Location: ../main-blog/home/index.php"); 
 
 ?>

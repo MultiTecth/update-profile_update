@@ -1,3 +1,8 @@
+<?php 
+session_start();
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,14 +19,26 @@
 <body>
   <div class="container">
     <div class="content">
-      <form action="signup-check.php" method="post">
+      <form action="signup-check.php" method="post" enctype="multipart/form-data">
+        <a href="../main-blog/home/index.php"><img src="../img/left.png" class="arrow"></a>
 
         <div class="title"><h2>SignUp</h2></div>
 
         <center>
           <label class="btn-upload">
-            <input type="file" name="fileupload">
-            <button class="btn"><img src="https://assets-a1.kompasiana.com/items/album/2021/03/24/blank-profile-picture-973460-1280-605aadc08ede4874e1153a12.png" alt=""></button>
+            <!-- <input type="file" name="fileupload" id="img"> -->
+            
+            <input type="file" class="form-control" id="img" placeholder="Enter password" name="my_image"/>
+
+            <button class="btn">
+              
+              <img src="../img/guest.jpg" class="guest">
+              
+              <div id="selectedBanner"></div>
+
+              <img src="../img/add_media.png" class="media" alt="ubah gambar profile">
+              
+            </button>
           </label>
         </center>
 
@@ -76,5 +93,43 @@
     </div>
   </div>
 
+  
+  <!-- src="../js/jquery-3.6.0.min.js" -->
+<script
+  src="../js/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"
+></script>
+<script>
+  var selDiv = "";
+  var storedFiles = [];
+  $(document).ready(function () {
+    $("#img").on("change", handleFileSelect);
+    selDiv = $("#selectedBanner");
+  });
+
+  function handleFileSelect(e) {
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+    filesArr.forEach(function (f) {
+      if (!f.type.match("image.*")) {
+        return;
+      }
+      storedFiles.push(f);
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var html =
+          '<img src="' +
+          e.target.result +
+          "\" data-file='" +
+          f.name +
+          "' class='avatar rounded lg' alt='Category Image' height='200px' width='200px'>";
+        selDiv.html(html);
+      };
+      reader.readAsDataURL(f);
+    });
+  }
+</script>
 </body>
 </html>

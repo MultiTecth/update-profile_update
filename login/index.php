@@ -17,6 +17,7 @@
   <div class="container">
     <div class="content">
       <form action="login.php" method="post">
+        <a href="../main-blog/home/index.php"><img src="../img/left.png" class="arrow"></a>
 
         <div class="title"><h2>Login</h2></div>
 
@@ -34,7 +35,7 @@
           
         <span class="text" >
           <input type="checkbox" name="check" id="check">
-          <label for="check">Remember me?</label>
+          <label for="check">Remember Me</label>
         </span>
 
         <span class="textlog">
