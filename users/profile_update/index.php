@@ -1,7 +1,7 @@
 <?php 
 session_start();
 $konek = "../../login/db_conn.php";
-include "../../login/db_conn.php";
+include $konek;
 include "../../login/output_gambar/id.php";
 if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] != "guest"){
   $id = $_SESSION['id'];
@@ -28,7 +28,7 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
         
       $link = "<img src='../../img/guest.jpg' alt=''>";
       $atr = "alt=''";
-      $photo_profile = profile($id, $link, $konek, $atr);
+      $photo_profile = profile($id, $uname, $link, $konek, $atr);
       // echo $photo_profile;
     
     } else {
@@ -107,7 +107,7 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
     <textarea id="bio" name="bio" placeholder="<?=$bio?>"></textarea>
     <br>
     <label for="male">gender</label>
-    <input type="radio" id="male" name="gender" value="m"><label for="male">male</label>
+    <input type="radio" id="male" name="gender" value="m" checked><label for="male">male</label>
     <input type="radio" id="female" name="gender" value="f"><label for="female">female</label>
 
     <br>

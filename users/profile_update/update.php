@@ -2,17 +2,32 @@
 session_start();
 include "../../login/db_conn.php";
 
-// data dari database
-$_SESSION['user_name'];
-$_SESSION['name'];
-$_SESSION['email'];
-$_SESSION['bio'];
-// $_SESSION['st'];
-$_SESSION['gender'];
-$_SESSION['password'];
+$un = $_SESSION['id'];
+$sql1 = "SELECT * FROM users WHERE id='$un'";
+$result1 = mysqli_query($conn, $sql1);
 
-// print_r($_POST);
-// print_r($_FILES);
+if(mysqli_num_rows($result1) === 1){
+  $row = mysqli_fetch_assoc($result1);
+
+  if($row['id'] == $un){
+    // data2 dari dir yg dikunjungi akan letakan di session dan akan dibawa
+    $read_uname = $row['user_name'];
+    $read_name = $row['name'];
+    $read_email = $row['email'];
+    $read_bio = $row['bio'];
+    $read_gender = $row['gender'];
+    $read_pass = $row['password'];
+  } else {
+    header("Location: index.php?error=session id tidak ada di database");
+    exit();
+  }
+}
+else {
+  header("Location: index.php?error=ada yang salah");
+  // echo $un;
+  exit();
+}
+
 // Image
 $img_name = $_FILES['image']['name'];
 $img_size = $_FILES['image']['size'];
@@ -35,71 +50,119 @@ $conp = $_POST['conp'];
 
 // Jika form kosong
 if(!(isset($name))){
-  $name = $_SESSION['name'];
-}
-if(!(isset($uname))){
-  $uname = $_SESSION['user_name'];
+  $name = $read_name;
 } else {
-  rename("../@".$_SESSION['user_name'],"../@".$uname);
-}
-if(!(isset($email))){
-  $email = $_SESSION['email'];
-}
-if(!(isset($bio))){
-  $bio = $_SESSION['bio'];
-}
-if(!(isset($gender))){
-  $gender = $_SESSION['gender'];
+  if($name == ''){
+    $name = $read_name;
+  }
 }
 
-// cek password
-if(!(isset($curp))){
-  if(!(isset($np))){
-    if(!(isset($conp))){
-      $password = $_SESSION['password'];
+if(!(isset($uname))){
+  $uname = $read_uname;
+} else { 
+  if($uname == ''){
+    $uname = $read_uname;
+  } 
+  rename("../@".$read_uname,"../@".$uname);
+}
+
+if(!(isset($email))){
+  $email = $read_email;
+} else {
+  if($email == ''){
+    $email = $read_email;
+  }
+}
+
+if(!(isset($bio))){
+  $bio = $read_bio;
+}
+
+if(!(isset($gender))){
+  $gender = $read_gender;
+}
+
+if(isset($curp) && isset($np) && isset($conp)){
+  if(($curp == '') && ($np == '') && ($conp == '')){
+    $password = $read_pass;
+  } 
+  else {
+    if($curp == $read_pass){
+      if($np == $conp){
+        $password = $np;
+      }
+      else {
+        // error karna form $np dan $conp tidak sama
+        header("Location: index.php?error=password yang baru tidak sama");
+        exit();
+      }
     }
     else {
-      // $np dan $curp kosong, $conp ada
-      // error = "isi $curp dan $np"
-      header("Location: index.php?error=isi password akun dan password barunya");
+      header("Location: index.php?error=password akun salah ");
       exit();
     }
-  }
-  else {
-    // artinya $curp kosong $np ada
-    // error = "isi curp"
-    header("Location: index.php?error=isi password akun");
-    exit();
   }
 } 
 else {
-  if($curp == $_SESSION['password']){
-    if($np == $conp){
-      $password = $np;
-    }
-    else {
-      // error karna form $np dan $conp tidak sama
-      header("Location: index.php?error=password yang baru tidak sama");
-      exit();
-    }
-  }
-  else {
-    // error kembali ke file sebelumnya
-    // karna pass db dan pass form tidak sama
-    header("Location: index.php?error=password akun salah ");
-    exit();
-  }
+  header("Location: index.php?error=isi password akun");
+  exit();
 }
 
-$password = md5($password);
+// cek password
+// if(!(isset($curp))){
+//   if(!(isset($np))){
+//     if(!(isset($conp))){
+//       $password = $read_pass;
+//     }
+//     else {
+//       // $np dan $curp kosong, $conp ada
+//       // error = "isi $curp dan $np"
+//       header("Location: index.php?error=isi password akun dan password barunya");
+//       exit();
+//     }
+//   }
+//   else {
+//     // artinya $curp kosong $np ada
+//     // error = "isi curp"
+//     header("Location: index.php?error=isi password akun");
+//     exit();
+//   }
+// } 
+// else {
+  
+//   if($curp == $read_pass){
+//     if($np == $conp){
+//       $password = $np;
+//     }
+//     else {
+//       // error karna form $np dan $conp tidak sama
+//       header("Location: index.php?error=password yang baru tidak sama");
+//       exit();
+//     }
+//   }
+//   else {
+//     if($curp == ''){
+//       $curp = $read_pass;
+//       $password = $curp;
+//     } 
+//     else {
+//       // error kembali ke file sebelumnya
+//       // karna pass db dan pass form tidak sama
+//       header("Location: index.php?error=password akun salah ");
+//       exit();
+//     }
+//   }
+// }
+
+// $password = md5($password);
 
 $user_data = 'uname='. $uname. '&name='.$name;
 
 if($img_name == ''){
-  $sql = "UPDATE users SET 
+  $sql2 = "UPDATE users SET 
   user_name = '$uname',
   name = '$name',
-  password = '$np',
+  password = '$password',
   email = '$email',
   bio = '$bio',
   gender = '$gender'
@@ -118,7 +181,7 @@ if($img_name == ''){
       $datagambar = addslashes(file_get_contents($tmp_name));
       // $propertiesgambar = getimageSize($tmp_name);
 
-      $sql = "UPDATE users SET 
+      $sql2 = "UPDATE users SET 
       user_name = '$uname',
       name = '$name',
       password = '$password',
@@ -135,9 +198,9 @@ if($img_name == ''){
   }
 }
 
-$result = mysqli_query($conn, $sql);
+$result2 = mysqli_query($conn, $sql2);
 
-if($result){
+if($result2){
   $_SESSION['id'] = $id;
   $_SESSION['name'] = $name;
   $_SESSION['user_name'] = $uname;

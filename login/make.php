@@ -1,5 +1,8 @@
 <?php 
+
+// Connect Database
 include "db_conn.php";
+// Untuk menggunakan function custom_copy()
 include "../admin/copy.php";
 session_start();
 

@@ -7,59 +7,60 @@
   <title>Login</title>
 
   <!-- CSS -->
-  <!-- <link rel="stylesheet" href="../css/login/style.css"> -->
   <link rel="stylesheet" href="../css/login/login.css">
-
 
 </head>
 <body>
-  
   <div class="container">
     <div class="content">
+
+      <!-- Akan terkirim ke file login.php -->
       <form action="login.php" method="post">
+
+        <!-- Logo kembali << -->
         <a href="../main-blog/home/index.php"><img src="../img/left.png" class="arrow"></a>
 
+        <!-- Title -->
         <div class="title"><h2>Login</h2></div>
 
+        <!-- Jika ada error -->
         <?php if(isset($_GET['error'])){ ?>
           <p class="error"><?php echo $_GET['error']?></p>
         <?php } ?>
-
+        
+        <!-- Tempat isi username -->
         <label for="input-username">
           <input type="text" name="uname" placeholder="Username">
         </label>
         
+        <!-- Tempat isi password -->
         <label for="password">
           <input type="password" name="pw" placeholder="Password">
         </label>
-          
+        
+        <!-- Checkbox remember me -->
         <span class="text" >
           <input type="checkbox" name="check" id="check">
           <label for="check">Remember Me</label>
         </span>
 
+        <!-- Tempat 2 tombol -->
         <span class="textlog">
+
+          <!-- Tombol login -->
           <label for="btn-submit" class="btn_submit">
             <button class="sub">Login</button>
           </label>
+
+          <!-- Tombol sign up -->
           <label for="btn-submit" class="btn_submit">
             <a href="register.php" class="sub">Sign Up</a>
           </label>
+          
         </span>
+
       </form>
     </div>
   </div>
-
-    <!-- 
-    <a href="../home/index.php" class="ca">home</a>
-    
-    <div class="option">
-      <a href="register.php" class="ca">register</a>
-    
-      <button type="submit">login</button>
-    </div> 
-    -->
-
-
 </body>
 </html>

@@ -10,6 +10,7 @@
   /* row-gap: 20px; */
   /* padding: 20px; */
 }
+
 .jumbotron .navbar .nav-menu{
   /* border: 1px solid white; */
   display:flex;
@@ -21,6 +22,9 @@
 .jumbotron .navbar .text{
   border-right: 1px solid gray;
   padding-right: 10px;
+}
+.jumbotron .navbar .text a {
+  text-decoration: none;
 }
 .jumbotron .navbar .text h2{
   font-size: 30px;

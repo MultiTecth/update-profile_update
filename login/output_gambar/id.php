@@ -1,11 +1,11 @@
 <?php 
-function profile($id, $link, $konek, $atr){
+function profile($id, $usrname, $link, $konek, $atr){
   include $konek;
-  $sql = "SELECT * FROM users WHERE id = $id";
+  $sql = "SELECT * FROM users WHERE id = $id AND user_name = '$usrname'";
   $result = mysqli_query($conn, $sql);
   if(mysqli_num_rows($result) === 1){
     $row = mysqli_fetch_assoc($result);
-    if($row['id'] === $id){
+    if($row['id'] == $id && $row['user_name'] == $usrname){
       $img = $row['profile_picture'];
       if(isset($img)){
         $encoded_image = base64_encode($img);
@@ -14,8 +14,8 @@ function profile($id, $link, $konek, $atr){
       } else {
         $hasil = $link;
       }
-    }
-  }
+    } 
+  } 
   return $hasil;
 }
 ?>

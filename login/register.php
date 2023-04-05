@@ -12,7 +12,6 @@ session_start();
   <title>Register</title>
 
   <!-- CSS -->
-  <!-- <link rel="stylesheet" href="../css/login/style.css"> -->
   <link rel="stylesheet" href="../css/login/sginup.css">
 
 </head>
@@ -20,10 +19,14 @@ session_start();
   <div class="container">
     <div class="content">
       <form action="signup-check.php" method="post" enctype="multipart/form-data">
+
+        <!-- Logo kembali -->
         <a href="../main-blog/home/index.php"><img src="../img/left.png" class="arrow"></a>
 
+        <!-- Judul -->
         <div class="title"><h2>SignUp</h2></div>
 
+        <!-- tempat upload gambar -->
         <center>
           <label class="btn-upload">
             <!-- <input type="file" name="fileupload" id="img"> -->
@@ -41,15 +44,19 @@ session_start();
             </button>
           </label>
         </center>
+        <!-- akhir tempat upload gambar -->
 
+        <!-- Jika ada error -->
         <?php if(isset($_GET['error'])){ ?>
           <p class="error"><?php echo $_GET['error']?></p>
         <?php } ?>
 
+        <!-- Jika berhasil -->
         <?php if(isset($_GET['success'])){ ?>
           <p class="success"><?php echo $_GET['success']?></p>
         <?php } ?>
         
+        <!-- form name -->
         <label for="name">
           <?php if(isset($_GET['name'])){ ?>
             <input type="text" name="name" placeholder="Name" value="<?php echo $_GET['name']?>">
@@ -57,7 +64,9 @@ session_start();
             <input type="text" name="name" placeholder="Name">
           <?php }?>
         </label>
-
+        <!-- akhir form name -->
+          
+        <!-- form uname -->
         <label for="uname">
         <?php if(isset($_GET['uname'])){ ?>
           <input type="text" name="uname" placeholder="Username" value="<?php echo $_GET['uname']?>">
@@ -65,7 +74,9 @@ session_start();
           <input type="text" name="uname" placeholder="Username">
         <?php }?>
         </label>
+        <!-- akhir form uname -->
 
+        <!-- form email -->
         <label for="email">
         <?php if(isset($_GET['email'])){ ?>
           <input type="email" name="email" placeholder="Email" value="<?php echo $_GET['email']?>">
@@ -73,33 +84,37 @@ session_start();
           <input type="email" name="email" placeholder="Email">
         <?php }?>
         </label>
+        <!-- akhir form email -->
         
-
+        <!-- form password -->
         <label for="password">
           <input type="password" name="pw" placeholder="Password">
         </label>
 
+        <!-- form tulis ulang password -->
         <label for="confirm-password">
           <input type="password" name="re_pw" placeholder="Confirm Password">
         </label>
 
+        <!-- Tombol daftar -->
         <label for="btn-submit" class="btn_submit">
           <button class="sub">SignUp</button>
         </label>
         
+        <!-- Jika sudah punya akun -->
         <a href="login.php">Already Have an Account</a>
 
       </form>
     </div>
   </div>
-
-  
-  <!-- src="../js/jquery-3.6.0.min.js" -->
+<!-- SCRIPT -->
 <script
   src="../js/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"
 ></script>
+
+<!-- agar bisa upload gambar -->
 <script>
   var selDiv = "";
   var storedFiles = [];

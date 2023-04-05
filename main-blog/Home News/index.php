@@ -1,22 +1,35 @@
 <?php 
-  session_start();
-  $konek = '../../login/db_conn.php';
-  include $konek;
-  include '../../login/output_gambar/id.php';
-  $koneksi = mysqli_connect("localhost", "root", "", "pkl");
-  if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] != "guest"){
+session_start();
 
+// Connect xampp
+$konek = '../../login/db_conn.php';
+include $konek;
+
+// Ambil function untuk menampilkan gambar
+include '../../login/output_gambar/id.php';
+
+// Connect ke database pkl
+$koneksi = mysqli_connect("localhost", "root", "", "pkl");
+
+// Jika sudah login
+if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] != "guest"){
+
+  // ambil data untuk ditampilkan di profile home
   $id = $_SESSION['id'];
   $user_name = $_SESSION['user_name'];
   $email = $_SESSION['email'];
+
+  // Akan membawa data ke folder users
   $_SESSION['idUser'] = $id;
   $_SESSION['uname'] = $user_name;
 
-  // $h = "<img src='../../img/guest.jpg' alt=''>";
-  $h = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
+  // untuk mengambil gambar 
+  $h = "<img src='../../img/guest.jpg' alt=''class='rounded-circle'>";
   $atr = "alt='' width='50' class='rounded-circle'";
-  $photo_profile = profile($id, $h, $konek, $atr);
+  $photo_profile = profile($id, $user_name, $h, $konek, $atr);
+
 }?>
+
 <!doctype html>
 <html lang="en">
 
@@ -32,32 +45,51 @@
 </head>
 
 <body>
+  <!-- Navbar -->
   <div class="jumbotron">
     <div class="navbar">
+
+      <!-- Navbar kiri -->
       <div class="nav-menu">
         <div class="text">
+        <a href="../home/">
           <h2>MultiBlog</h2>
+        </a>
         </div>
-        <!-- <div class="strip">|</div> -->
         <div class="list">
           <ul class="ul-list">
+
             <li><a href="../home/">Home</a></li>
             <li><a href="../About/">About</a></li>
+
             <div class="dropdown-center">
-              <button class="btn text-white dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+
+              <button class="btn text-white dropdown-toggle" 
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
                 Browse
               </button>
+
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../Home News/">News</a></li>
-                <li><a class="dropdown-item" href="../Home Novel/">Novel</a></li>
-                <li><a class="dropdown-item" href="../Home Short Story/">Short Story</a></li>
+                <li><a class="dropdown-item" 
+                        href="../Home News/">News</a></li>
+                <li><a class="dropdown-item" 
+                        href="../Home Novel/">Novel</a></li>
+                <li><a class="dropdown-item" 
+                        href="../Home Short Story/">Short Story</a></li>
               </ul>
+
             </div>
           </ul>
         </div>
       </div>
+      <!-- Akhir Navbar kiri -->
+
+      <!-- Navbar kanan -->
       <div class="more-menu-cnt">
+
+        <!-- Search & Tweet -->
         <div class="more-menu">
           <div class="search">
             <span class="icon"><img src="../assets/iconpack/searchpng.png" alt=""></span>
@@ -65,10 +97,13 @@
           </div>
           <button class="tweet-btn">Tweet</button>
         </div>
+        <!-- Akhir S&T -->
 
         <!-- Sudah login -->
         <?php if((isset($_SESSION['id']) && isset($_SESSION['user_name']) && !($_SESSION['id'] == "guest" && $_SESSION['user_name'] == "guest"))){?>
-       <div class="profil">
+
+        <!-- Profile Login -->
+        <div class="profil">
           <div class="dropdown">
             <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
@@ -101,9 +136,12 @@
             </ul>
           </div>
         </div>
+        <!-- Akhir profile login -->
         
-        <?php } else {?>
         <!-- Belum login --> 
+        <?php } else {?>
+
+        <!-- Profile Guest -->
         <div class="profil">
           <div class="dropdown">
             <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -124,17 +162,20 @@
             </ul>
           </div>
         </div> 
+        <!-- Akhir Profile Guest -->
         <?php }?>
       </div>
+      <!-- Akhir Navbar kanan -->
 
-      
     </div> 
-
-    </div>
   </div>
+  <!-- Akhir Navbar -->
+
+  <!-- Background -->
   <div class="jmb-container">
     <img src="../assets/background.jpg" alt="">
   </div>
+  <!-- Akhir Background -->
 
   <div class="container-content">
     <div class="center-content">
@@ -248,15 +289,22 @@
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
   <footer>
     <div class="footer-bottom">
       <p>© 2023 PT. MULTITECH SOLUTION MAKASSAR</p>
     </div>
   </footer>
+  <!-- Akhir Footer -->
+
   <!-- SCRIPT -->
-  <script src="../../js/bootstrap.bundle.min.js"
+  <!-- untuk dropdown -->
+  <script 
+    src="../../js/bootstrap.bundle.min.js"
     integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous">
+  </script>
 </body>
 
 </html>
