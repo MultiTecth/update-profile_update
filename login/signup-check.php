@@ -16,6 +16,13 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
     return $data;
   }
 
+  if (!function_exists('str_contains')) {
+    function str_contains(string $haystack, string $needle): bool
+    {
+        return '' === $needle || false !== strpos($haystack, $needle);
+    }
+  } 
+
   $unameTest = $_POST['uname'];
   if($unameTest == trim($unameTest) && str_contains($unameTest, ' ')){
     header("Location: register.php?error=Username not accept space letter");
