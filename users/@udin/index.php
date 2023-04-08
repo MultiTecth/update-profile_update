@@ -9,7 +9,7 @@ $konek = "../../login/db_conn.php" ;
 include $konek;
 
 // untuk menggunakan function profile
-include "../../login/output_gambar/id.php";
+include '../../function.php';
 
 // nama lokasi folder yang dikunjungi
 $direc = basename(__DIR__);
@@ -42,7 +42,6 @@ if(!(isset($_SESSION['user_name']) &&
   $name = $_SESSION['name'];
   $email = $_SESSION['email'];
   $bio = $_SESSION['bio'];
-  $gender = $_SESSION['gender'];
 
   // guest != $profile_yg_dikunjungi
   // artinya guest melihat akun org lain
@@ -79,7 +78,6 @@ if(!(isset($_SESSION['user_name']) &&
         $name = $_SESSION['read_name'];
         $email = $_SESSION['read_email'];
         $bio = $_SESSION['read_bio'];
-        $gender = $_SESSION['read_gender'];
         $read = true;
       }
     }

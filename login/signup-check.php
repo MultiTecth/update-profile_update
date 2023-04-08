@@ -27,7 +27,7 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
   } 
 
   // untuk mengecek apakah formnya ada space atau tidak
-  $unameTest = $_POST['uname'];
+  $unameTest = htmlspecialchars($_POST['uname']);
   // jika ada, ulang
   if($unameTest == trim($unameTest) && str_contains($unameTest, ' ')){
     header("Location: register.php?error=Username not accept space letter");
@@ -39,7 +39,7 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
   }
 
   // untuk mengecek apakah formnya ada space atau tidak
-  $emailTest = $_POST['email'];
+  $emailTest = htmlspecialchars($_POST['email']);
   // jika ada, ulang
   if($emailTest == trim($emailTest) && str_contains($emailTest, ' ')){
     header("Location: register.php?error=email not accept space letter");
@@ -51,9 +51,9 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
   }
 
   // validasi data
-  $name = validate($_POST['name']);
-  $pass = validate($_POST['pw']);
-  $re_pw = validate($_POST['re_pw']);
+  $name = validate(htmlspecialchars($_POST['name']));
+  $pass = validate(htmlspecialchars($_POST['pw']));
+  $re_pw = validate(htmlspecialchars($_POST['re_pw']));
 
   // untuk mengambil data dari gambar yang diupload
   $img_name = $_FILES['my_image']['name'];

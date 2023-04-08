@@ -9,6 +9,8 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     /* height: 100vh; */
+    
+    /* min-height: 100vw; */
 }
 /* .jmb-container{
     padding:0.5em;
@@ -254,6 +256,7 @@ body{
 
 /* Footer */
 .footer-bottom{
+    display: inline-block;
     margin-top: 10px;
     background:#001331;
     width:100%;
@@ -261,6 +264,7 @@ body{
     padding: 15px 0;
     text-align: center;
     color: white;
+    margin-bottom: 5px;
 }
 
 .footer-bottom p{

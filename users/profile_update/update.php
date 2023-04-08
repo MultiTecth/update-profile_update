@@ -1,32 +1,17 @@
 <?php
 session_start();
 include "../../login/db_conn.php";
+include "../../function.php";
 
 $un = $_SESSION['id'];
-$sql1 = "SELECT * FROM users WHERE id='$un'";
-$result1 = mysqli_query($conn, $sql1);
 
-if(mysqli_num_rows($result1) === 1){
-  $row = mysqli_fetch_assoc($result1);
+$row = show($un);
 
-  if($row['id'] == $un){
-    // data2 dari dir yg dikunjungi akan letakan di session dan akan dibawa
-    $read_uname = $row['user_name'];
-    $read_name = $row['name'];
-    $read_email = $row['email'];
-    $read_bio = $row['bio'];
-    $read_gender = $row['gender'];
-    $read_pass = $row['password'];
-  } else {
-    header("Location: index.php?error=session id tidak ada di database");
-    exit();
-  }
-}
-else {
-  header("Location: index.php?error=ada yang salah");
-  // echo $un;
-  exit();
-}
+$read_uname = $row[0]['user_name'];
+$read_name = $row[0]['name'];
+$read_email = $row[0]['email'];
+$read_bio = $row[0]['bio'];
+$read_pass = $row[0]['password'];
 
 // Image
 $img_name = $_FILES['image']['name'];
@@ -36,17 +21,16 @@ $error = $_FILES['image']['error'];
 
 // data dari isi form
 $id = $_SESSION['id'];
-$name = $_POST['name'];
-$uname = $_POST['uname'];
-$email = $_POST['email'];
-$bio = $_POST['bio'];
-$gender = $_POST['gender'];
+$name = htmlspecialchars($$_POST['name']);
+$uname = htmlspecialchars($$_POST['uname']);
+$email = htmlspecialchars($$_POST['email']);
+$bio = htmlspecialchars($$_POST['bio']);
 // current password
-$curp = $_POST['curp'];
+$curp = htmlspecialchars($$_POST['curp']);
 // new password
-$np = $_POST['np'];
+$np = htmlspecialchars($$_POST['np']);
 // continue password
-$conp = $_POST['conp'];
+$conp = htmlspecialchars($$_POST['conp']);
 
 // Jika form kosong
 if(!(isset($name))){
@@ -62,8 +46,9 @@ if(!(isset($uname))){
 } else { 
   if($uname == ''){
     $uname = $read_uname;
-  } 
-  rename("../@".$read_uname,"../@".$uname);
+  } else if($uname != $read_uname){
+    rename("../@".$read_uname,"../@".$uname);
+  }
 }
 
 if(!(isset($email))){
@@ -78,11 +63,8 @@ if(!(isset($bio))){
   $bio = $read_bio;
 }
 
-if(!(isset($gender))){
-  $gender = $read_gender;
-}
 
-if(isset($curp) && isset($np) && isset($conp)){
+if(isset($curp)){
   if(($curp == '') && ($np == '') && ($conp == '')){
     $password = $read_pass;
   } 
@@ -159,14 +141,13 @@ else {
 $user_data = 'uname='. $uname. '&name='.$name;
 
 if($img_name == ''){
-  $sql2 = "UPDATE users SET 
+  $sql = "UPDATE users SET 
   user_name = '$uname',
   name = '$name',
   password = '$password',
   email = '$email',
-  bio = '$bio',
-  gender = '$gender'
-  WHERE id = '$id'";
+  bio = '$bio'
+  WHERE id = $id";
 } else {
   
   if($img_size < 70000 && $img_size > 500000){
@@ -181,32 +162,38 @@ if($img_name == ''){
       $datagambar = addslashes(file_get_contents($tmp_name));
       // $propertiesgambar = getimageSize($tmp_name);
 
-      $sql2 = "UPDATE users SET 
+      $sql = "UPDATE users SET 
       user_name = '$uname',
       name = '$name',
       password = '$password',
       email = '$email',
       bio = '$bio',
-      gender = '$gender',
       profile_picture = '$datagambar'
 
-      WHERE id = '$id'";
+      WHERE id = $id";
     } else {
       $em = "hanya bisa menerima jenis file jpg jpeg dan png";
       header("location: index.php?error=$em");
     }
   }
 }
+// try{
+//   $result2 = mysqli_query($conn, $sql);
+// } catch(mysqli_sql_exception $e) {
+//   echo "<pre>";
+//   var_dump($e);
+//   echo "</pre>";
+//   // header("Location: index.php?error=belum mengisi form");
+//   exit();
+// }
+// $result2 = mysqli_query($conn, $sql);
 
-$result2 = mysqli_query($conn, $sql2);
-
-if($result2){
+if(mysqli_query($conn, $sql)){
   $_SESSION['id'] = $id;
   $_SESSION['name'] = $name;
   $_SESSION['user_name'] = $uname;
   $_SESSION['email'] = $email;
   $_SESSION['bio'] = $bio;
-  $_SESSION['gender'] = $gender;
   header("Location: ../@".$uname."/index.php");
   exit();
 } else {

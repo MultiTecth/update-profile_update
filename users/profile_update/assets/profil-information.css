@@ -1,0 +1,177 @@
+.back img {
+  width: 7.2em;
+}
+
+.container-content {
+  width: 1200px;
+  height: max-content;
+  margin: 20px auto;
+  background: linear-gradient(180deg, rgba(0, 17, 43, 0.4) 0%, rgba(41, 71, 119, 0.336) 100%);
+}
+.container-content .profil-information {
+  padding: 1.5em;
+  width: 902px;
+  height: max-content;
+  background: rgba(41, 71, 119, 0.2);
+  margin: 0 auto;
+}
+.container-content .profil-information h3 {
+  color: white;
+  font-weight: 500;
+}
+.container-content .profil-information .box-profil {
+  padding: 2em;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1.2em;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.container-content .profil-information .box-profil .picture > img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50% !important;
+}
+.container-content .profil-information .box-profil .btn-input {
+  display: block;
+}
+/* .container-content .profil-information .box-profil .btn-input .upload {
+  text-align: center;
+  line-height: 41px;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 184px;
+  height: 41px;
+  color: white;
+  font-weight: 400;
+  background: #061833;
+  border: 1px solid #061225;
+  border-radius: 3px;
+}
+.container-content .profil-information .box-profil .btn-input .text {
+  display: block;
+  color: #FFFFFF;
+  font-weight: 200;
+  margin-top: 0.5em;
+} */
+
+.upload {
+  margin: 0 20px;
+  color: #fff;
+}
+
+.upload p {
+  margin: 0;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  
+  text-align: center;
+  line-height: 41px;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 184px;
+  height: 41px;
+  color: white;
+  font-weight: 400;
+  background: #061833;
+  border: 1px solid #061225;
+  border-radius: 3px;
+  
+  display: inline-block;
+
+  /* border: 1px solid #aaa;
+  height: 50px;
+  width: 220px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px; */
+}
+
+.container-content .profil-information .account-information {
+  margin-top: 2em;
+}
+.container-content .profil-information .account-information{
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 55em;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.container-content .profil-information .account-information label {
+  color: white;
+}
+.container-content .profil-information .account-information input {
+  width: 555px;
+  height: 25px;
+  background: rgba(41, 71, 119, 0.5);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  margin: 0.6em;
+  color: rgb(255, 255, 255);
+}
+.container-content .profil-information .account-information .bio {
+  width: 555px;
+  min-height: 92px;
+  max-height: 92px;
+  outline: none;
+  border: none;
+  margin: 0 auto;
+  color: white;
+  padding-left: 20px;
+  border-radius: 5px;
+  background: rgba(41, 71, 119, 0.5); 
+  margin-top: 10px;
+}
+.container-content .profil-information .change {
+  margin-top: 5em;
+}
+.container-content .profil-information .change-password {
+  margin-top: 2em;
+}
+.container-content .profil-information .change-password {
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 53em;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.container-content .profil-information .change-password label {
+  color: white;
+}
+.container-content .profil-information .change-password input {
+  width: 555px;
+  height: 25px;
+  background: rgba(41, 71, 119, 0.5);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  margin: 0.6em;
+  color: rgb(255, 255, 255);
+}
+.container-content .profil-information .change-password .btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 2em;
+  margin-top: 5em;
+}
+.container-content .profil-information .change-password .btn .save {
+  width: 163px;
+  height: 35px;
+  background: #061833;
+  border: 2px solid #061225;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  color: white;
+  border: none;
+}
+
+/*# sourceMappingURL=profil-information.css.map */

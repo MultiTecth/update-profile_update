@@ -41,7 +41,6 @@ if(mysqli_num_rows($result) === 1){
     $_SESSION['read_id'] = $row['id'];
     $_SESSION['read_email'] = $row['email'];
     $_SESSION['read_bio'] = $row['bio'];
-    $_SESSION['read_gender'] = $row['gender'];
     $_SESSION['read_st'] = $row['st'];
 
     // berhasil menyimpan data dan akan kembali ke profile yg dikunjungi

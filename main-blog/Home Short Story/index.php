@@ -6,7 +6,8 @@
   include $konek;
 
   // Ambil function untuk menampilkan gambar
-  include '../../login/output_gambar/id.php';
+  include '../../function.php';
+
 
   // Connect ke database pkl
   $koneksi = mysqli_connect("localhost", "root", "", "pkl");

@@ -23,7 +23,7 @@ if (isset($_POST['uname']) && isset($_POST['pw'])){
   } 
 
   // Untuk mengecek apakah input username nya ada spasi atau tidak
-  $unameTest = $_POST['uname'];
+  $unameTest = htmlspecialchars($_POST['uname']);
   // Jika ada, buat ulang di index.php
   if($unameTest == trim($uname) && str_contains($unameTest, ' ')){
     header("Location: index.php?error=Username not accepted space letter");
@@ -35,7 +35,7 @@ if (isset($_POST['uname']) && isset($_POST['pw'])){
   }
 
   // Validasi password
-  $pass = validate($_POST['pw']);
+  $pass = validate(htmlspecialchars($_POST['pw']));
 
   // Jika form username kosong, kembali
   if (empty($uname)){
@@ -65,7 +65,6 @@ if (isset($_POST['uname']) && isset($_POST['pw'])){
         $_SESSION['bio'] = $row['bio'];
         $_SESSION['st'] = $row['st'];
         $_SESSION['email'] = $row['email'];
-        $_SESSION['gender'] = $row['gender'];
         
         $encoded_image = base64_encode($row["profile_picture"]);
         $_SESSION['hinh'] = $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=''";

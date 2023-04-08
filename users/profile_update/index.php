@@ -1,44 +1,25 @@
 <?php 
 session_start();
-$konek = "../../login/db_conn.php";
-include $konek;
-include "../../login/output_gambar/id.php";
+
+include "../../function.php";
+
+
 if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] != "guest"){
   $id = $_SESSION['id'];
-  // $_SESSION[$user_name] = $name = $_SESSION['name'];
-  // $email = $_SESSION['email'];
-  // $Hinh = $_SESSION['gambar'];
-  // $img = $_SESSION['kbg'];
-
-  $sql = "SELECT * FROM users WHERE id = $id";
-  $result = mysqli_query($conn, $sql);
-  if(mysqli_num_rows($result) === 1){
-    $row = mysqli_fetch_assoc($result);
-
-    if($row['id'] === $id){
-      $_SESSION['id'] = $row['id'];
-      $uname = $_SESSION['user_name'] = $row['user_name'];
-      $name = $_SESSION['name'] = $row['name'];
-      $email = $_SESSION['email'] = $row['email'];
-      $bio = $_SESSION['bio'] = $row['bio'];
-      $st = $_SESSION['st'] = $row['st']; 
-      $_SESSION['gender'] = $row['gender'];
-      $_SESSION['password'] = $row['password'];
-
-        
-      $link = "<img src='../../img/guest.jpg' alt=''>";
-      $atr = "alt=''";
-      $photo_profile = profile($id, $uname, $link, $konek, $atr);
-      // echo $photo_profile;
-    
-    } else {
-      header("Location: index.php?error=Incorect username or password");
-      exit();
-    }
-  }
-  // $Hinh = "<img src='../../img/guest.jpg' alt=''>";
-
   
+  $output = show($id);  
+  // $row[] = $output[0];
+  $photo_profile = $output[1];
+
+  // var_dump($output[0]);
+
+  $_SESSION['id'] = $output[0]['id'];
+  $uname = $_SESSION['user_name'] = $output[0]['user_name'];
+  $name = $_SESSION['name'] = $output[0]['name'];
+  $email = $_SESSION['email'] = $output[0]['email'];
+  $bio = $_SESSION['bio'] = $output[0]['bio'];
+  $st = $_SESSION['st'] = $output[0]['st']; 
+  $_SESSION['password'] = $output[0]['password'];
 
  } else {
   header("Location: ../../main-blog/home/index.php");
@@ -47,84 +28,126 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
 
 // echo $photo_profile
 ?>
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="../../css/up/filep.css">
-  <link rel="stylesheet" href="../../css/up/style.css">
-  <link rel="stylesheet" href="../../css/up/profile.css">
-
-  <script src="../../js/jquery.min.js"></script>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edit Profil</title>
+  <link rel="stylesheet" href="./assets/root.css">
+  <link rel="stylesheet" href="../../css/boostrap/bootstrap.min.css">
 </head>
+
 <body>
-
-  <h1>Account Information</h1>
-  <form action="update.php" method="post" enctype="multipart/form-data">
-
-    <div class="gambar">
-
-      <div class="kotak-gambar" id="selectedBanner">
-        <?=$photo_profile?> 
+  <div class="jumbotron">
+    <link rel="stylesheet" href="./assets/nav.css">
+    <div class="navbar">
+      <div class="nav-menu">
+        <div class="text">
+          <h2>MultiBlog</h2>
+        </div>
       </div>
-      
-      <div class="upload">
-        <label class="custom-file-upload">
-          <input
-            type="file"
-            class="form-control"
-            id="img"
-            placeholder="Enter password"
-            name="image"/>
-          Choose a file
-        </label>
-        <p>Accceptable formats: jpg, png only<br> 
-        Max file size is 500kb and min size 70kb
-        </p>
+      <div class="profile">
+        <div class="profil-box">
+          <!-- <img src="./assets/img/profile/❝ save __ follow ❞ 2.png" alt="" width="50"
+              class="rounded-circle"> -->
+          <?=$photo_profile?>
+          <div class="profil-text"><?=$uname?></div>
+        </div>
       </div>
-
-      
-      
     </div>
-    
-    
-    <br>
-    <label for="name">name</label>
-    <input type="text" id="name" name="name" placeholder="<?=$name?>">
-    <br>
-    <label for="username">username</label>
-    <input type="text" id="username" name="uname" placeholder="<?=$uname?>">
-    <br>
-    <label for="email">email</label>
-    <input type="email" id="email" name="email" placeholder="<?=$email?>">
-    <br>
-    <label for="bio">bio</label>
-    <textarea id="bio" name="bio" placeholder="<?=$bio?>"></textarea>
-    <br>
-    <label for="male">gender</label>
-    <input type="radio" id="male" name="gender" value="m" checked><label for="male">male</label>
-    <input type="radio" id="female" name="gender" value="f"><label for="female">female</label>
+  <div class="jmb-container" style='background-image: url("../../img/background.jpg")'>
+    <div class="input-profil">
+      <link rel="stylesheet" href="./assets/input-profil.css">
+      <input type="file" id="upload" hidden/>
+      <center> <label for="upload"><img src="./assets/img/icon/Subtract.png" alt=""></label></center>
+    </div>
+  </div>
 
-    <br>
-    <h1>Change Password</h1>
-    <label for="curp">current password</label>
-    <input type="password" id="curp" name="curp">
-    <br>
-    <label for="np">new password</label>
-    <input type="password" id="np" name="np">
-    <br>
-    <label for="conp">confirm password</label>
-    <input type="password" id="conp" name="conp">
-    <br>
-    <button>save</button>
+  <div class="back">
+    <a href="../@<?=$uname?>"><img src="./assets/img/icon/Back.png" alt=""></a>
+    <!-- <span class="back">Back</span> -->
+  </div>
+
+  <form action="update.php" method="post" enctype="multipart/form-data">
+    <div class="container-content">
+      <div class="profil-information">
+      <link rel="stylesheet" href="./assets/profil-information.css">
+      <h3>Account Information</h3>
+
+      <div class="box-profil">
+
+        <div class="picture" id="selectedBanner">
+          <?=$photo_profile?> 
+        </div>
+        
+        <div class="upload">
+          <label class="custom-file-upload">
+            <input
+              type="file"
+              class="form-control"
+              id="img"
+              placeholder="Enter password"
+              name="image"/>
+            Choose a file
+          </label>
+          <p>Accceptable formats: jpg, png only<br> 
+          Max file size is 500kb and min size 70kb
+          </p>
+        </div>
+      </div>
+
+
+      <div class="account-information">
+
+        <label for="name">Name</label>
+        <input type="text" value="<?=$name?>" id="name" name="name">
+
+        <label for="username">Username</label>
+        <input type="text" value="<?=$uname?>" id="username" name="uname">
+
+        <label for="email">Email</label>
+        <input type="text" value="<?=$email?>" id="email" name="email">
+
+        <label for="bio">Bio</label>
+        <textarea name="bio" id="bio" class="bio"><?=$bio?></textarea>
+        
+      </div>
+
+      <h3 class="change">Change Password</h3>
+      <div class="change-password">
+        <label for="curp">Current Password</label>
+        <input type="password" id="curp" name="curp">
+
+        <label for="np">New Password</label>
+        <input type="password" id="np" name="np">
+
+        <label for="conp">Confirm Password</label>
+        <input type="password" id="conp" name="conp">
+        <div class="kosong"></div>
+        <div class="btn">
+          <button class="save">Save</button>
+        </div>
+      </div>
+    </div>
   </form>
-  
-<script
+  <footer>
+    <div class="footer-bottom">
+      <p>© 2023 PT. MULTITECH SOLUTION MAKASSAR</p>
+      <link rel="stylesheet" href="./assets/footer.css">
+    </div>
+  </footer>
+  <!-- SCRIPT -->
+  <script src="../../js/bootstrap.bundle.min.js"
+    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+    crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $("#image id").click(function(){
+        $("#input id").click();
+      });
+    </script>
+    <script
 src="../../js/jquery-3.6.0.min.js"
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossorigin="anonymous"
@@ -160,6 +183,5 @@ crossorigin="anonymous"
     });
   }
 </script>
-
 </body>
 </html>
