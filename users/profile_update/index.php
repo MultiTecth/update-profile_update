@@ -40,6 +40,9 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
 </head>
 
 <body>
+  <script>
+    alert('<?=$_GET['error']?>');
+  </script>
   <div class="jumbotron">
     <link rel="stylesheet" href="./assets/nav.css">
     <div class="navbar">

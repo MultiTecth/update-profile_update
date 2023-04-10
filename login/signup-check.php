@@ -5,18 +5,12 @@ session_start();
 include "db_conn.php";
 // untuk menggunakan function costume_copy
 include "../dbphp/copy.php";
+// mengambil function
+include "../function.php";
 
 
 // Jika sudah terisi
 if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && isset($_POST['re_pw']) && isset($_POST['email'])){
-
-  // function untuk validasi data
-  function validate($data){
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
 
   // function untuk jika ada user yang tidak support str_contains
   if (!function_exists('str_contains')) {
@@ -27,10 +21,10 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
   } 
 
   // untuk mengecek apakah formnya ada space atau tidak
-  $unameTest = htmlspecialchars($_POST['uname']);
+  $unameTest = $_POST['uname'];
   // jika ada, ulang
   if($unameTest == trim($unameTest) && str_contains($unameTest, ' ')){
-    header("Location: register.php?error=Username not accept space letter");
+    header("Location: register.php?error=Username tidak menerima spasi");
     exit();
   }
   // jika tidak, validasi
@@ -39,10 +33,10 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
   }
 
   // untuk mengecek apakah formnya ada space atau tidak
-  $emailTest = htmlspecialchars($_POST['email']);
+  $emailTest = $_POST['email'];
   // jika ada, ulang
   if($emailTest == trim($emailTest) && str_contains($emailTest, ' ')){
-    header("Location: register.php?error=email not accept space letter");
+    header("Location: register.php?error=email tidak menerima spasi");
     exit();
   }
   // jika tidak, validasi
@@ -51,9 +45,9 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
   }
 
   // validasi data
-  $name = validate(htmlspecialchars($_POST['name']));
-  $pass = validate(htmlspecialchars($_POST['pw']));
-  $re_pw = validate(htmlspecialchars($_POST['re_pw']));
+  $name = validate($_POST['name']);
+  $pass = mysqli_real_escape_string($conn ,validate($_POST['pw']));
+  $re_pw = mysqli_real_escape_string($conn ,validate($_POST['re_pw']));
 
   // untuk mengambil data dari gambar yang diupload
   $img_name = $_FILES['my_image']['name'];
@@ -68,38 +62,39 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
 
   // mengecek apakah uname sudah diisi
   if (empty($uname)){
-    header("Location: register.php?error=Username is required&$user_data");
+    header("Location: register.php?error=Masukkan username&$user_data");
     exit();
   } 
   // mengecek apakah pass sudah diisi
   else if(empty($pass)){
-    header("Location: register.php?error=Password is required&$user_data");
+    header("Location: register.php?error=Masukkan password&$user_data");
     exit();
   } 
   // mengecek apakah mengulang password sudah diisi
   else if(empty($re_pw)){
-    header("Location: register.php?error=Re Password is required&$user_data");
+    header("Location: register.php?error=Masukkan password lanjutan&$user_data");
     exit();
   } 
   // mengecek apakah name sudah diisi
   else if(empty($name)){
-    header("Location: register.php?error=Name is required&$user_data");
+    header("Location: register.php?error=Masukkan nama&$user_data");
     exit();
   } 
   // mengecek apakah email sudah diisi
   else if(empty($email)){
-    header("Location: register.php?error=Email is required&$user_data");
+    header("Location: register.php?error=Masukkan email&$user_data");
     exit();
   } 
   // mengecek apakah password sesuai dengan penulisan ulang password
   else if($pass !== $re_pw){
-    header("Location: register.php?error=The password does not match&$user_data");
+    header("Location: register.php?error=Password tidak sesuai&$user_data");
     exit();
   } 
   // Jika semuanya behasil
   else {
     // hashing the password
-    $pass = md5($pass);
+    // $pass = md5($pass);
+    $pass = password_hash($pass, PASSWORD_DEFAULT);
 
     // Mengambil data dari database sesuai dengan nama username
     $sql = "SELECT * FROM users WHERE user_name='$uname'";
@@ -107,7 +102,7 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
 
     // Jika username sudah ada yg ambil
     if(mysqli_num_rows($result) > 0){
-      header("Location: register.php?error=The username is taken try another&$user_data");
+      header("Location: register.php?error=The username sudah diambil&$user_data");
       exit();
     } 
     // jika nama username belum kepakai
@@ -116,7 +111,7 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
       // Jika image uploadnya kosong
       if($img_name == ''){
         $sql2 = "INSERT INTO users(user_name, password, name, email, st) 
-        VALUE('$uname','$re_pw','$name', '$email', 'u');";
+        VALUE('$uname','$pass','$name', '$email', 'u');";
       } 
 
       // jika terisi
@@ -124,7 +119,7 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
         // Jika ukuran gambar dibawah 70kb dan diatas 500kb
         // Kembali ke halaman sebelumnya
         if($img_name < 70000 && $img_size > 500000){
-          $em = "ukuran image nya harus dibawah 2MB";
+          $em = "ukuran image nya harus dibawah 500kb dan diatas 70kb";
           header("location: register.php?error=$em");
         } 
         // Jika sesuai ukurannya
@@ -142,12 +137,13 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
             $datagambar = addslashes(file_get_contents($tmp_name));
 
             // simpan gambar dan data2 yang lain ke database
-            $sql2 = "INSERT INTO users(user_name, password, name, email, profile_picture, st) VALUE('$uname','$re_pw','$name', '$email', '$datagambar', 'u');";
+            $sql2 = "INSERT INTO users(user_name, password, name, email, profile_picture, st) VALUE('$uname','$pass','$name', '$email', '$datagambar', 'u');";
           } 
           // Jika jenis file tidak sesuai
           else {
             $em = "hanya bisa menerima jenis file jpg jpeg dan png";
             header("location: register.php?error=$em");
+            exit();
           }
         }
 
@@ -171,7 +167,7 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
       } 
       // jika tidak berhasil menyimpan
       else {
-        header("Location: register.php?error=unknown error occurred&$user_data");
+        header("Location: register.php?error=masalah tidak diketahui&$user_data");
         exit();
       }
     }

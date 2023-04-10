@@ -9,7 +9,7 @@ $konek = "../../login/db_conn.php" ;
 include $konek;
 
 // untuk menggunakan function profile
-include '../../function.php';
+include "../../function.php";
 
 // nama lokasi folder yang dikunjungi
 $direc = basename(__DIR__);
@@ -86,9 +86,9 @@ if(!(isset($_SESSION['user_name']) &&
 
 
 // mengambil gambar profile dari halaman yang dikunjungi
-$h = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
+$src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
 $atr = "alt='' width='50' class='rounded-circle'";
-$photo_profile = profile($id, $uname, $h, $konek, $atr);
+$photo_profile = profile($id, $src, $atr);
 
 
 ?>

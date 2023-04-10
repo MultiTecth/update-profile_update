@@ -24,9 +24,9 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
   $_SESSION['uname'] = $user_name;
 
   // untuk mengambil gambar 
-  $h = "<img src='../../img/guest.jpg' alt=''class='rounded-circle'>";
+  $src = "<img src='../../img/guest.jpg' alt=''class='rounded-circle'>";
   $atr = "alt='' width='50' class='rounded-circle'";
-  $photo_profile = profile($id, $user_name, $h, $konek, $atr);
+  $photo_profile = profile($id, $src, $atr);
 
 }?>
 

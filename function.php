@@ -1,16 +1,16 @@
 <?php 
 $konek = "login/db_conn.php";
-include $konek;
+require $konek;
 
 
 
-function profile($id, $usrname, $link, $konek, $atr){
-  include $konek;
-  $sql = "SELECT * FROM users WHERE id = $id AND user_name = '$usrname'";
+function profile($id, $link, $atr){
+  global $conn;
+  $sql = "SELECT * FROM users WHERE id = $id";
   $result = mysqli_query($conn, $sql);
   if(mysqli_num_rows($result) === 1){
     $row = mysqli_fetch_assoc($result);
-    if($row['id'] == $id && $row['user_name'] == $usrname){
+    if($row['id'] == $id){
       $img = $row['profile_picture'];
       if(isset($img)){
         $encoded_image = base64_encode($img);
@@ -29,7 +29,7 @@ function profile($id, $usrname, $link, $konek, $atr){
 
 
 function show($id){
-  global $conn, $konek;
+  global $conn;
   $sql = "SELECT * FROM users WHERE id = $id";
   $result = mysqli_query($conn, $sql);
   if(mysqli_num_rows($result) === 1){
@@ -39,7 +39,7 @@ function show($id){
       $link = "<img src='../../img/guest.jpg' alt='' width='50'
       class='rounded-circle'>";
       $atr = "alt='' width='50' class='rounded-circle'";
-      $photo_profile = profile($id, $row['user_name'], $link, $konek, $atr);
+      $photo_profile = profile($id, $link, $atr);
       // echo $photo_profile;
     
     } else {
@@ -49,4 +49,13 @@ function show($id){
   }
   return array($row, $photo_profile);
 }
+
+// function untuk validasi data
+function validate($data){
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
 ?>

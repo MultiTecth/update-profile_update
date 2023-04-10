@@ -21,16 +21,39 @@ $error = $_FILES['image']['error'];
 
 // data dari isi form
 $id = $_SESSION['id'];
-$name = htmlspecialchars($$_POST['name']);
-$uname = htmlspecialchars($$_POST['uname']);
-$email = htmlspecialchars($$_POST['email']);
-$bio = htmlspecialchars($$_POST['bio']);
+$name = validate($_POST['name']);
+
+// untuk mengecek apakah formnya ada space atau tidak
+$unameTest = $_POST['uname'];
+// jika ada, ulang
+if($unameTest == trim($unameTest) && str_contains($unameTest, ' ')){
+  header("Location: register.php?error=Username tidak menerima spasi");
+  exit();
+}
+// jika tidak, validasi
+else {
+  $uname = validate($unameTest);
+}
+
+// untuk mengecek apakah formnya ada space atau tidak
+$emailTest = $_POST['email'];
+// jika ada, ulang
+if($emailTest == trim($emailTest) && str_contains($emailTest, ' ')){
+  header("Location: register.php?error=email tidak menerima spasi");
+  exit();
+}
+// jika tidak, validasi
+else {
+  $email = validate($emailTest);
+}
+
+$bio = validate($_POST['bio']);
 // current password
-$curp = htmlspecialchars($$_POST['curp']);
+$curp = validate($_POST['curp']);
 // new password
-$np = htmlspecialchars($$_POST['np']);
+$np = mysqli_real_escape_string($conn, validate($_POST['np']));
 // continue password
-$conp = htmlspecialchars($$_POST['conp']);
+$conp = mysqli_real_escape_string($conn,validate($_POST['conp']));
 
 // Jika form kosong
 if(!(isset($name))){
@@ -69,7 +92,7 @@ if(isset($curp)){
     $password = $read_pass;
   } 
   else {
-    if($curp == $read_pass){
+    if(password_verify($curp, $read_pass)){
       if($np == $conp){
         $password = $np;
       }
@@ -137,6 +160,7 @@ else {
 // }
 
 // $password = md5($password);
+$password = password_hash($password, PASSWORD_DEFAULT);
 
 $user_data = 'uname='. $uname. '&name='.$name;
 

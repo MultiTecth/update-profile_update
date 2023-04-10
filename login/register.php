@@ -49,11 +49,17 @@ session_start();
         <!-- Jika ada error -->
         <?php if(isset($_GET['error'])){ ?>
           <p class="error"><?php echo $_GET['error']?></p>
+          <script>
+            alert('<?=$_GET['error']?>');
+          </script>
         <?php } ?>
 
         <!-- Jika berhasil -->
         <?php if(isset($_GET['success'])){ ?>
           <p class="success"><?php echo $_GET['success']?></p>
+          <script>
+            alert('Berhasil');
+          </script>
         <?php } ?>
         
         <!-- form name -->
@@ -102,7 +108,7 @@ session_start();
         </label>
         
         <!-- Jika sudah punya akun -->
-        <a href="login.php">Already Have an Account</a>
+        <a href="login.php">Sudah Punya Akun?</a>
 
       </form>
     </div>

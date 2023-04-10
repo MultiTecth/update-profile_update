@@ -22,7 +22,7 @@ if(!(isset($_SESSION["idUser"]) && $_SESSION["idUser"] != "guest")){
       exit();
     }
     else {
-      header("Location: index.php?error=Incorect username or password");
+      header("Location: index.php?error=Username/Password tidak sesuai");
       exit();
     }
   }

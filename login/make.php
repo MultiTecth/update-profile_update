@@ -30,7 +30,7 @@ if($img_name != ''){
     $img_upload_path = 'uploads/'.$new_img_name;
     move_uploaded_file($tmp_name, $img_upload_path);
   } else {
-    $em = "You cant upload files of this type";
+    $em = "Hanya menerima tipe jpg, jpeg, png";
     header("location: index.php?error=$em");
   }
 } else {
