@@ -203,6 +203,19 @@ body{
     width:197px;
     height:32px;
 }
+.follow{
+    color:white;
+    border:none;
+    border-radius:5px;
+    background-color:#061833;
+    box-shadow:0px 4px 4px 0px#00000040;
+    padding:5px;
+    width:197px;
+    height:32px;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
 .bio > span.bio{
     font-size:15px;
     letter-spacing:2px;

@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-// Connect database
-include "db_conn.php";
-// untuk menggunakan function costume_copy
-include "../dbphp/copy.php";
 // mengambil function
 include "../function.php";
 
@@ -124,7 +120,6 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
         } 
         // Jika sesuai ukurannya
         else {
-
           // Untuk mengecek jenis file (extension) yg diupload
           $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
           $img_ex_lc = strtolower($img_ex);

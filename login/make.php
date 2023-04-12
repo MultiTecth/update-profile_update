@@ -1,5 +1,7 @@
 <?php 
 
+// FILE TERLUPAKAN
+
 // Connect Database
 include "db_conn.php";
 // Untuk menggunakan function custom_copy()

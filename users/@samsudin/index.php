@@ -1,12 +1,8 @@
 <?php
 
 // FILE INI TERKONEKSI LANGSUNG DENGAN FILE readonly.php
-
 session_start();
 
-// connect ke localhost xampp
-$konek = "../../login/db_conn.php" ;
-include $konek;
 
 // untuk menggunakan function profile
 include "../../function.php";
@@ -90,6 +86,26 @@ $src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>
 $atr = "alt='' width='50' class='rounded-circle'";
 $photo_profile = profile($id, $src, $atr);
 
+// cek follow
+$id_user = $_SESSION['id'];
+$id_read = $id;
+
+$sql_follow = "SELECT * FROM follow WHERE id_user = $id_user AND id_read = $id_read";
+$sql_friend = "SELECT * FROM follow WHERE id_user = $id_read AND id_read = $id_user";
+$result_follow = mysqli_query($conn, $sql_follow);
+$result_friend = mysqli_query($conn, $sql_friend);
+
+if(mysqli_num_rows($result_follow) > 0){
+  $pengguna = true;
+} else {
+  $pengguna = false;
+}
+
+if(mysqli_num_rows($result_friend) > 0){
+  $lihat = true;
+} else {
+  $lihat = false;
+}
 
 ?>
 
@@ -118,17 +134,11 @@ $photo_profile = profile($id, $src, $atr);
 
       <div class="more-menu-cnt">
         <div class="more-menu">
-          <!-- <div class="search">
-            <span class="" alt=""><img src="/Home/homepage/assets/iconpack/searchpng.png" alt=""></span>
-            <input type="search" placeholder="Search">
-          </div> -->
           <button class="tweet-btn">Tweet</button>
         </div>
 
         <div class="profil">
           <div class="profile-btn">
-            <!-- <img src="/Home/home-login-profil/assest/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50"
-            class="rounded-circle"> -->
             <?=$photo_profile?>
             <div class="profil-text"><?=$name?></div>
           </div>
@@ -172,6 +182,12 @@ $photo_profile = profile($id, $src, $atr);
         <a class="edit-profil" href="../profile_update/index.php">
           <button>Edit Profil</button>
         </a><!-- edit profil end-->
+        <?php } else if ($pengguna && $lihat) {?>
+          <a class="follow" href="../../other/unfollow.php">Friend</a>
+        <?php } else if ($pengguna) {?>
+          <a class="follow" href="../../other/unfollow.php">Followed</a>
+        <?php } else {?>
+        <a class="follow" href="../../other/follow.php">Follow</a>
         <?php }?>
       </div> <!-- Profil card end -->
 

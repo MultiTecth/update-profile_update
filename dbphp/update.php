@@ -1,10 +1,9 @@
 <?php
 
-include "../login/db_conn.php";
-include "copy.php";
+include "../function.php";
+
 $sql = "SELECT user_name FROM users";
 $result = mysqli_query($conn, $sql);
-
 
 $src = "update_users";
 

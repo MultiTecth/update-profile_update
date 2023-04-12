@@ -1,6 +1,5 @@
 <?php
 session_start();
-include "../../login/db_conn.php";
 include "../../function.php";
 
 $un = $_SESSION['id'];

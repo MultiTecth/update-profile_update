@@ -1,7 +1,6 @@
 <?php
 session_start();
 // Connect database
-include "db_conn.php";
 include "../function.php";
 // Jika sudah input password dan username
 if (isset($_POST['uname']) && isset($_POST['pw'])){

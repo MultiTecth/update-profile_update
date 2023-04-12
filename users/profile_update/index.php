@@ -8,7 +8,7 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
   $id = $_SESSION['id'];
   
   $output = show($id);  
-  // $row[] = $output[0];
+  // $row[] = $output[0]; 
   $photo_profile = $output[1];
 
   // var_dump($output[0]);
@@ -53,8 +53,6 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
       </div>
       <div class="profile">
         <div class="profil-box">
-          <!-- <img src="./assets/img/profile/❝ save __ follow ❞ 2.png" alt="" width="50"
-              class="rounded-circle"> -->
           <?=$photo_profile?>
           <div class="profil-text"><?=$uname?></div>
         </div>

@@ -4,6 +4,7 @@ require $konek;
 
 
 
+// function untuk menampilkan image profile
 function profile($id, $link, $atr){
   global $conn;
   $sql = "SELECT * FROM users WHERE id = $id";
@@ -24,10 +25,7 @@ function profile($id, $link, $atr){
   return $hasil;
 }
 
-
-
-
-
+// untuk menampilkan data2 user dari database
 function show($id){
   global $conn;
   $sql = "SELECT * FROM users WHERE id = $id";
@@ -41,7 +39,6 @@ function show($id){
       $atr = "alt='' width='50' class='rounded-circle'";
       $photo_profile = profile($id, $link, $atr);
       // echo $photo_profile;
-    
     } else {
       header("Location: index.php?error=id tidak ditemukan");
       exit();
@@ -56,6 +53,29 @@ function validate($data){
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;
+}
+
+// $src = source / sumber lokasi
+// $dst = target lokasi
+function custom_copy( $src , $dst ) {
+  $dir = opendir( $src );
+
+  @mkdir($dst);
+
+  while( $file = readdir($dir) ) {
+    
+    if(($file != '.') && ($file != '..')){
+
+      if( is_dir($src . '/' . $file) ) {
+        custom_copy( $src . '/' . $file , $dst . '/' . $file );
+      } 
+      else {
+        copy ( $src . '/' . $file , $dst . '/' . $file );
+      }
+
+    }
+  }
+  closedir ( $dir );
 }
 
 ?>
