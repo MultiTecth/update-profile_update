@@ -8,94 +8,33 @@ session_start();
 include "../../function.php";
 
 // nama lokasi folder yang dikunjungi
-$direc = basename(__DIR__);
-$_SESSION['direc'] = $direc;
+$dir = substr(basename(__DIR__), 1);
+$_SESSION['read_uname'] = $dir;
 
-// pengkodisian untuk read atau ubah
-$read = false;
-
-// ketika orang yg belum login (guest) kunjungi akun org lain =
-if(!(isset($_SESSION['user_name']) && 
-    isset($_SESSION['name']) && 
-    isset($_SESSION['id']) 
-  )){?>
-
-  <!-- memaksa pindah file -->
-  <!-- pindah file untuk guest dapat izin melihat -->
-  <script type="text/javascript">
-  window.location.href = '../readonly.php';
-  </script>
-
-<!-- artinya yang mengunjungi sudah login -->
-<!-- atau guest sudah mendapatkan izin -->
-<?php } else {
-
-  // isi nya tergantung yang mengunjungi
-  // jika sudah login, maka data login akan disimpan disini 
-  // jika belum login, maka semau datanya keisi "guest"
-  $uname = $_SESSION['user_name'];
-  $id = $_SESSION['id'];
-  $name = $_SESSION['name'];
-
-  if($uname != 'guest') {
-    $email = $_SESSION['email'];
-    $bio = $_SESSION['bio'];
-  }
-
-  // guest != $profile_yg_dikunjungi
-  // artinya guest melihat akun org lain
-  // 
-  // $akun_yg_login != $profile_yg_dikunjungi
-  // artinya yg dibuka bukan akun miliknya tapi org lain
-  // 
-  // jika sama artinya dia sedang buka akunnya sendiri dan langsung lompat dari if condition
-  if(("@".$uname != $direc)){
-
-    // mengambil data profile yang dikunjungi
-    if(!(isset($_SESSION['read_uname']) && isset($_SESSION['read_name']) && isset($_SESSION['read_id']))){
-
-      // Jika kosong artinya belum mengambil data
-      // akan diarahkan ke readonly.php
-      $_SESSION['direc'] = $direc;
-      header("Location: ../readonly.php");
-      exit();
-
-    } 
-    // data dari profile yang dikunjungi sudah didapatkan
-    else {
-
-      // mengecek apakah datanya sudah sesuai atau belum
-      if("@".$_SESSION['read_uname'] != $direc){
-        $_SESSION['direc'] = $direc;
-        header("Location: ../readonly.php");
-        exit();
-      } 
-      // artinya sudah sesuai
-      else {
-        $uname = $_SESSION['read_uname'];
-        $id = $_SESSION['read_id'];
-        $name = $_SESSION['read_name'];
-        $email = $_SESSION['read_email'];
-        $bio = $_SESSION['read_bio'];
-        $read = true;
-      }
-    }
-  }
+$sql = "SELECT * FROM users WHERE user_name = '$dir'";
+$result = mysqli_query($conn, $sql);
+if(mysqli_num_rows($result) === 1){
+  $row = mysqli_fetch_assoc($result);
+  $id = $row['id'];
+  $uname = $row['user_name'];
+  $email = $row['email'];
+  $bio = $row['bio'];
 }
 
 
 // mengambil gambar profile dari halaman yang dikunjungi
 $src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
 $atr = "alt='' width='50' class='rounded-circle'";
-$photo_profile = profile($id, $src, $atr);
 
-// cek follow
-$id_user = $_SESSION['id'];
-$id_read = $id;
 
 $pengguna = $lihat = false;
-if($id_user != 'guest'){
+if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
+  $user_name = $_SESSION['user_name'];
+  // cek follow
+  $id_user = $_SESSION['id'];
+  $id_read = $id;
   $sql_follow = "SELECT * FROM follow WHERE id_user = $id_user AND id_read = $id_read";
+  $_SESSION['read_id'] = $id_read;
   $sql_friend = "SELECT * FROM follow WHERE id_user = $id_read AND id_read = $id_user";
   $result_follow = mysqli_query($conn, $sql_follow);
   $result_friend = mysqli_query($conn, $sql_friend);
@@ -107,6 +46,9 @@ if($id_user != 'guest'){
   if(mysqli_num_rows($result_friend) > 0){
     $lihat = true;
   }
+} else {
+  $user_name = 'guest';
+  $id_user = 'guest';
 }
 
 ?>
@@ -141,8 +83,13 @@ if($id_user != 'guest'){
 
         <div class="profil">
           <div class="profile-btn">
-            <?=$photo_profile?>
-            <div class="profil-text"><?=$name?></div>
+            <?php if(isset($_SESSION['id']) && !empty($_SESSION['id'])){?>
+            <?=profile($_SESSION['id'], $src, $atr);?>
+            <div class="profil-text"><?=$_SESSION['user_name']?></div>
+            <?php } else {?>
+            <?=$src?>
+            <div class="profil-text">guest</div>
+            <?php }?>
           </div>
         </div>
       </div>
@@ -165,10 +112,10 @@ if($id_user != 'guest'){
       <div class="profil-card">
         <div class="profil-box">
         <div class="profil-picture">
-          <?=$photo_profile?>
+          <?=profile($id, $src, $atr)?>
         </div> <!-- profil end-->
           <div class="username bio">
-            <h3><?=$name?></h3>
+            <h3><?=$uname?></h3>
             <div class="bio">
               <span class="bio">
                 <?=$bio?>
@@ -177,10 +124,10 @@ if($id_user != 'guest'){
           </div> <!-- User-name end-->
           <div class="user-email">
             <!-- <br> -->
-            <span class="gray">@<?=$uname?></span>
+            <span class="gray"><?=$email?></span>
           </div> <!-- User-email end-->
         </div><!-- box end-->
-        <?php if(!$read){?>
+        <?php if($user_name == $dir){?>
         <a class="edit-profil" href="../profile_update/index.php">
           <button>Edit Profil</button>
         </a><!-- edit profil end-->
