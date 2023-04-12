@@ -21,7 +21,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
   $_SESSION['uname'] = $user_name;
 
   // untuk mengambil gambar 
-  $src = "<img src='../../img/guest.jpg' alt=''class='rounded-circle'>";
+  $src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
   $atr = "alt='' width='50' class='rounded-circle'";
   $photo_profile = profile($id, $src, $atr);
 
@@ -92,7 +92,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
             <span class="icon"><img src="../assets/iconpack/searchpng.png" alt=""></span>
             <input type="search" placeholder="Search">
           </div>
-          <button class="tweet-btn">Tweet</button>
+          <a href="../../tweet/form-upload.php" class="tweet-btn">Tweet</a>
         </div>
         <!-- Akhir S&T -->
 

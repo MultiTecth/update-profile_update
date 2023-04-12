@@ -115,6 +115,10 @@
   box-sizing: border-box;
   background-color: #022865;
   color:white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .dropdown .btn{
   border:none;

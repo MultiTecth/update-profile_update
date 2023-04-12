@@ -24,6 +24,11 @@
     $src = "<img src='../../img/guest.jpg' width='50' alt='' class='rounded-circle'>";
     $atr = "alt='' width='50' class='rounded-circle'";
     $photo_profile = profile($id, $src, $atr);
+
+    $sql_follow = "SELECT id_read FROM follow WHERE id_user = $id";
+    $result_follow = mysqli_query($conn, $sql_follow);
+
+
   }
 ?>
 
@@ -94,7 +99,7 @@
             <span class="icon"><img src="../assets/iconpack/searchpng.png" alt=""></span>
             <input type="search" placeholder="Search">
           </div>
-          <button class="tweet-btn">Tweet</button>
+          <a href="../../tweet/form-upload.php" class="tweet-btn">Tweet</a>
         </div>
         <!-- Akhir S&T -->
 
@@ -182,67 +187,44 @@
     <!-- Friendlist Container -->
     <div class="left-content">
       <div class="title">
-        <h3>Friendlist</h3>
+        <h3>Followed</h3>
       </div>
 
       <div class="content">
         <div class="card-container-left">
           <!-- Card1 -->
-          <!-- <div class="card">
-            <div class="image"><img src="../assets/friend-profil/b0f887a041cce87d5a4e5e46524466d9 1.png"
-                alt=""></div>
+
+
+<?php if(isset($result_follow)){
+  if (mysqli_num_rows($result_follow) > 0) {
+    while($row = mysqli_fetch_assoc($result_follow)) {  
+      
+      $id_follow = $row['id_read'];
+      $sql_user = "SELECT user_name, bio FROM users WHERE id = $id_follow";
+      $result_user = mysqli_query($conn, $sql_user);
+      if (mysqli_num_rows($result_user) > 0) {
+        while($col = mysqli_fetch_assoc($result_user)) {?>
+        
+          <a class="card" href="../../users/@<?=$col['user_name']?>/">
+            <div class="image">
+              <?=profile($id_follow, $src, $atr);?>
+            </div>
             <div class="text">
               <p>
-              <h6 class="friend-username">Username</h6>
-              bio
+              <h6 class="friend-username"><?=$col['user_name']?></h6>
+              <p><?=$col['bio']?></p>
               </p>
             </div>
-          </div> -->
+          </a>
 
-          <!-- Card2 -->
-          <!-- <div class="card">
-            <div class="image"><img src="../assets/friend-profil/tewadawd 1.png" alt=""></div>
-            <div class="text">
-              <p>
-              <h6 class="friend-username">h</h6>
-              hi i’m a journalist and i make ..
-              </p>
-            </div>
-          </div> -->
+<?php 
+        }
+      }
+    }
+  }
+}
+?>
 
-          <!-- Card3 -->
-          <!-- <div class="card">
-            <div class="image"><img src="../assets/friend-profil/🍀🍞 (@M_M_0103) _ Twitter 1.png" alt="">
-            </div>
-            <div class="text">
-              <p>
-              <h6 class="friend-username">gabriell</h6>
-              <3 </p>
-            </div>
-          </div> -->
-
-          <!-- Card4 -->
-          <!-- <div class="card">
-            <div class="image"><img src="../assets/friend-profil/♡ 1.png" alt=""></div>
-            <div class="text">
-              <p>
-              <h6 class="friend-username">njunn</h6>
-              hi there!
-              </p>
-            </div>
-          </div> -->
-
-          <!-- Card5 -->
-          <!-- <div class="card">
-            <div class="image"><img src="../assets/friend-profil/비비 (BIBI) 1.png" alt=""></div>
-            <div class="text">
-              <p>
-              <h6 class="friend-username">bailey</h6>
-              isi sendiri
-              </p>
-            </div>
-          </div> -->
-          <!-- Close Card -->
         </div> <!-- Closing tag container card -->
       </div>
     </div>

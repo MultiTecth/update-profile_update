@@ -123,6 +123,10 @@ body{
     box-sizing: border-box;
     background-color: #022865;
     color:white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /* Profile Menu */
 .profil .profile-btn{

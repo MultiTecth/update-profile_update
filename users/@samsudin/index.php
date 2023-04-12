@@ -36,8 +36,11 @@ if(!(isset($_SESSION['user_name']) &&
   $uname = $_SESSION['user_name'];
   $id = $_SESSION['id'];
   $name = $_SESSION['name'];
-  $email = $_SESSION['email'];
-  $bio = $_SESSION['bio'];
+
+  if($uname != 'guest') {
+    $email = $_SESSION['email'];
+    $bio = $_SESSION['bio'];
+  }
 
   // guest != $profile_yg_dikunjungi
   // artinya guest melihat akun org lain
@@ -90,21 +93,20 @@ $photo_profile = profile($id, $src, $atr);
 $id_user = $_SESSION['id'];
 $id_read = $id;
 
-$sql_follow = "SELECT * FROM follow WHERE id_user = $id_user AND id_read = $id_read";
-$sql_friend = "SELECT * FROM follow WHERE id_user = $id_read AND id_read = $id_user";
-$result_follow = mysqli_query($conn, $sql_follow);
-$result_friend = mysqli_query($conn, $sql_friend);
+$pengguna = $lihat = false;
+if($id_user != 'guest'){
+  $sql_follow = "SELECT * FROM follow WHERE id_user = $id_user AND id_read = $id_read";
+  $sql_friend = "SELECT * FROM follow WHERE id_user = $id_read AND id_read = $id_user";
+  $result_follow = mysqli_query($conn, $sql_follow);
+  $result_friend = mysqli_query($conn, $sql_friend);
 
-if(mysqli_num_rows($result_follow) > 0){
-  $pengguna = true;
-} else {
-  $pengguna = false;
-}
-
-if(mysqli_num_rows($result_friend) > 0){
-  $lihat = true;
-} else {
-  $lihat = false;
+  if(mysqli_num_rows($result_follow) > 0){
+    $pengguna = true;
+  }
+  
+  if(mysqli_num_rows($result_friend) > 0){
+    $lihat = true;
+  }
 }
 
 ?>
@@ -134,8 +136,8 @@ if(mysqli_num_rows($result_friend) > 0){
 
       <div class="more-menu-cnt">
         <div class="more-menu">
-          <button class="tweet-btn">Tweet</button>
-        </div>
+          <a href="../../tweet/form-upload.php" class="tweet-btn">Tweet</a>
+        </div> 
 
         <div class="profil">
           <div class="profile-btn">
@@ -186,7 +188,7 @@ if(mysqli_num_rows($result_friend) > 0){
           <a class="follow" href="../../other/unfollow.php">Friend</a>
         <?php } else if ($pengguna) {?>
           <a class="follow" href="../../other/unfollow.php">Followed</a>
-        <?php } else {?>
+        <?php } else if ($id_user != 'guest'){?>
         <a class="follow" href="../../other/follow.php">Follow</a>
         <?php }?>
       </div> <!-- Profil card end -->

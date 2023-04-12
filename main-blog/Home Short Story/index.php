@@ -90,7 +90,7 @@
             <span class="icon"><img src="../assets/iconpack/searchpng.png" alt=""></span>
             <input type="search" placeholder="Search">
           </div>
-          <button class="tweet-btn">Tweet</button>
+          <a href="../../tweet/form-upload.php" class="tweet-btn">Tweet</a>
         </div>
         <!-- Akhir S&T -->
 
