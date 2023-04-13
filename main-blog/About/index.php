@@ -16,9 +16,6 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
   $user_name = $_SESSION['user_name'];
   $email = $_SESSION['email'];
 
-  // Akan membawa data ke folder users
-  $_SESSION['idUser'] = $id;
-  $_SESSION['uname'] = $user_name;
 
   // untuk mengambil gambar 
   $src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";

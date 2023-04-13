@@ -10,7 +10,7 @@ $read_uname = $row[0]['user_name'];
 $read_name = $row[0]['name'];
 $read_email = $row[0]['email'];
 $read_bio = $row[0]['bio'];
-$read_pass = $row[0]['password'];
+$read_pass = $row[0]['password']; //enkripsi
 
 // Image
 $img_name = $_FILES['image']['name'];
@@ -93,7 +93,7 @@ if(isset($curp)){
   else {
     if(password_verify($curp, $read_pass)){
       if($np == $conp){
-        $password = $np;
+        $password = password_hash($np, PASSWORD_DEFAULT);
       }
       else {
         // error karna form $np dan $conp tidak sama
@@ -159,7 +159,7 @@ else {
 // }
 
 // $password = md5($password);
-$password = password_hash($password, PASSWORD_DEFAULT);
+
 
 $user_data = 'uname='. $uname. '&name='.$name;
 

@@ -6,6 +6,8 @@ include '../../function.php';
 $sql_users = "SELECT id, user_name, email FROM users";
 $result_users = mysqli_query($conn, $sql_users);
 
+$src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
+$atr = "alt='' width='50' class='rounded-circle'";
 ?>
 
 <!doctype html>
@@ -57,16 +59,14 @@ $result_users = mysqli_query($conn, $sql_users);
           <div class="dropdown">
             <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
-              <img src="../home-login-profil/assest/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50"
-                class="rounded-circle">
+              <?=profile($_SESSION['id'], $src, $atr)?> 
             </a>
             <ul class="dropdown-menu">
               <div class="profil-picture">
-                <img src="../home-login-profil/assest/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50"
-                  class="rounded-circle">
+                <?=profile($_SESSION['id'], $src, $atr)?>
                 <span class="username">
-                  <h4>Sjunn</h4>
-                  <h6>audreyyy@gmail.com</h6>
+                  <h4><?=$_SESSION['user_name']?></h4>
+                  <h6><?=$_SESSION['email']?></h6>
                 </span>
               </div>
               <li><a class="dropdown-item" href="../profilpage/index.html"><button><div class="user-icon"><img src="../home-login-profil/assest/user.png" alt=""></div>Profile</button></a></li>
@@ -102,8 +102,7 @@ if(isset($result_users)){
 ?>
       <div class="box-content">
         <div class="profil-picture">
-          <img src="../home-login-profil/assest/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50"
-            class="rounded-circle">
+          <?=profile($id_user, $src, $atr)?>
           <span class="username">
             <h4><?=$uname?></h4>
             <h6><?=$email?></h6>

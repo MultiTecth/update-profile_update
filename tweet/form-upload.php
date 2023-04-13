@@ -1,11 +1,15 @@
 <?php
 session_start();
+
+include '../function.php';
 $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
 $id = $_SESSION['id'];
 if(empty($id)){
   header("location: ../main-blog/home/");
   exit();
 }
+$src = "<img src='../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
+$atr = "alt='' width='50' class='rounded-circle'";
 
 ?>
 <!doctype html>
@@ -73,9 +77,9 @@ if(empty($id)){
         <div class="post-page">
           <div class="profil">
             <div class="profil-container">
-              <span class="profil-picture"><img src="./assets/img/image_2023-04-04_11-45-17.png" alt=""></span>
+              <span class="profil-picture"><?=profile($_SESSION['id'], $src, $atr)?></span>
               <div class="text">
-              <h3><?=$_SESSION['uname']?></h3>
+              <h3><?=$_SESSION['user_name']?></h3>
               <span class="email"><?=$_SESSION['email']?></span>
               </div> <!--Text end-->
             </div><!--End Profil-container-->

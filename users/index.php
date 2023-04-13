@@ -2,11 +2,11 @@
 session_start();
 include "../login/db_conn.php";
 
-if(!(isset($_SESSION["idUser"]) && $_SESSION["idUser"] != "guest")){
+if(!(isset($_SESSION["id"]) && $_SESSION["id"] != "guest")){
   header("location: ../main-blog/home/index.php");
   exit();
 } else {
-  $id = $_SESSION['idUser'];
+  $id = $_SESSION['id'];
 
   $sql = "SELECT * FROM users WHERE id = '$id'";
   $result = mysqli_query($conn, $sql);
