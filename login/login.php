@@ -50,6 +50,13 @@ if (isset($_POST['uname']) && isset($_POST['pw'])){
 
       // Jika data sesuai dengan isi form
       if(password_verify($pass, $row['password'])){
+        $_SESSION["login"] = true;
+        
+        if( isset($_POST['remember']) ){
+          setcookie('id', $row['id'], time()+1000, "/");
+          setcookie('key', hash('sha256', $row['user_name']), time()+1000, "/");
+        }
+
         $_SESSION['user_name'] = $row['user_name'];
         $_SESSION['name'] = $row['name'];
         $_SESSION['id'] = $row['id'];

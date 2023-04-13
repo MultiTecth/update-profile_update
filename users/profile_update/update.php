@@ -112,54 +112,6 @@ else {
   exit();
 }
 
-// cek password
-// if(!(isset($curp))){
-//   if(!(isset($np))){
-//     if(!(isset($conp))){
-//       $password = $read_pass;
-//     }
-//     else {
-//       // $np dan $curp kosong, $conp ada
-//       // error = "isi $curp dan $np"
-//       header("Location: index.php?error=isi password akun dan password barunya");
-//       exit();
-//     }
-//   }
-//   else {
-//     // artinya $curp kosong $np ada
-//     // error = "isi curp"
-//     header("Location: index.php?error=isi password akun");
-//     exit();
-//   }
-// } 
-// else {
-  
-//   if($curp == $read_pass){
-//     if($np == $conp){
-//       $password = $np;
-//     }
-//     else {
-//       // error karna form $np dan $conp tidak sama
-//       header("Location: index.php?error=password yang baru tidak sama");
-//       exit();
-//     }
-//   }
-//   else {
-//     if($curp == ''){
-//       $curp = $read_pass;
-//       $password = $curp;
-//     } 
-//     else {
-//       // error kembali ke file sebelumnya
-//       // karna pass db dan pass form tidak sama
-//       header("Location: index.php?error=password akun salah ");
-//       exit();
-//     }
-//   }
-// }
-
-// $password = md5($password);
-
 
 $user_data = 'uname='. $uname. '&name='.$name;
 

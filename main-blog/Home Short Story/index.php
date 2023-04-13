@@ -1,27 +1,47 @@
 <?php 
   session_start();
 
-  // Connect xampp
-  $konek = '../../login/db_conn.php';
-  include $konek;
-
   // Ambil function untuk menampilkan gambar
   include '../../function.php';
 
   // Jika sudah login
-  if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] != "guest"){
+  if( isset($_COOKIE['id']) && isset($_COOKIE['key']) ){
 
     // ambil data untuk ditampilkan di profile home
+    $id = $_COOKIE['id'];
+    $key = $_COOKIE['key'];
+    
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE id = $id");
+    $row = mysqli_fetch_assoc($result);
+  
+    // cek cookie dan username
+    if( $key === hash('sha256', $row['user_name']) ){
+      $_SESSION['login'] = true;
+      $user_name = $row['user_name'];
+      $email = $row['email'];
+
+    }
+  }
+  else if (isset($_SESSION['login'])) {
     $id = $_SESSION['id'];
     $user_name = $_SESSION['user_name'];
     $email = $_SESSION['email'];
+  }
 
+
+  if(isset($id)){
     // untuk mengambil gambar 
-    $src = "<img src='../../img/guest.jpg' alt=''class='rounded-circle'>";
+    $src = "<img src='../../img/guest.jpg' width='50' alt='' class='rounded-circle'>";
     $atr = "alt='' width='50' class='rounded-circle'";
     $photo_profile = profile($id, $src, $atr);
+    
+    $sql_follow = "SELECT id_read FROM follow WHERE id_user = $id";
+    $result_follow = mysqli_query($conn, $sql_follow);
   }
+
+
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -91,7 +111,7 @@
         <!-- Akhir S&T -->
 
         <!-- Sudah login -->
-        <?php if((isset($_SESSION['id']) && isset($_SESSION['user_name']) && !($_SESSION['id'] == "guest" && $_SESSION['user_name'] == "guest"))){?>
+        <?php if(isset($_SESSION["login"])){?>
 
         <!-- Profile Login -->
         <div class="profil">
@@ -106,7 +126,7 @@
                 <!-- <img src="../assets/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50" class="rounded-circle"> -->
                 <?=$photo_profile;?>
                 <span class="username">
-                  <h4><?=$user_name?></h4>
+                  <h4>@<?=$user_name?></h4>
                   <h6><?=$email?></h6>
                 </span>
               </div>

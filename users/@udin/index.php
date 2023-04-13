@@ -28,17 +28,41 @@ $atr = "alt='' width='50' class='rounded-circle'";
 
 
 $pengguna = $lihat = false;
-if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
+if( isset($_COOKIE['id']) && isset($_COOKIE['key']) ){
+  
+  // ambil data untuk ditampilkan di profile home
+  $id_user = $_COOKIE['id'];
+  $key = $_COOKIE['key'];
+  
+  $result = mysqli_query($conn, "SELECT * FROM users WHERE id = $id_user");
+  $row = mysqli_fetch_assoc($result);
+
+  // cek cookie dan username
+  if( $key === hash('sha256', $row['user_name']) ){
+    $_SESSION['login'] = true;
+    $user_name = $row['user_name'];
+  }
+
+} else if(isset($_SESSION['login'])){
+
   $user_name = $_SESSION['user_name'];
-  // cek follow
   $id_user = $_SESSION['id'];
+
+} else {
+  $user_name = 'guest';
+  $id_user = 'guest';
+}
+
+if($id_user != 'guest'){
   $id_read = $id;
-  $sql_follow = "SELECT * FROM follow WHERE id_user = $id_user AND id_read = $id_read";
   $_SESSION['read_id'] = $id_read;
+
+  $sql_follow = "SELECT * FROM follow WHERE id_user = $id_user AND id_read = $id_read";
   $sql_friend = "SELECT * FROM follow WHERE id_user = $id_read AND id_read = $id_user";
+
   $result_follow = mysqli_query($conn, $sql_follow);
   $result_friend = mysqli_query($conn, $sql_friend);
-
+  
   if(mysqli_num_rows($result_follow) > 0){
     $pengguna = true;
   }
@@ -46,9 +70,6 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
   if(mysqli_num_rows($result_friend) > 0){
     $lihat = true;
   }
-} else {
-  $user_name = 'guest';
-  $id_user = 'guest';
 }
 
 ?>
@@ -83,9 +104,9 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
 
         <div class="profil">
           <div class="profile-btn">
-            <?php if(isset($_SESSION['id']) && !empty($_SESSION['id'])){?>
+            <?php if(isset($_SESSION['login'])){?>
             <?=profile($_SESSION['id'], $src, $atr);?>
-            <div class="profil-text"><?=$_SESSION['user_name']?></div>
+            <div class="profil-text">@<?=$user_name?></div>
             <?php } else {?>
             <?=$src?>
             <div class="profil-text">guest</div>
@@ -115,7 +136,7 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
           <?=profile($id, $src, $atr)?>
         </div> <!-- profil end-->
           <div class="username bio">
-            <h3><?=$uname?></h3>
+            <h3>@<?=$uname?></h3>
             <div class="bio">
               <span class="bio">
                 <?=$bio?>

@@ -43,8 +43,8 @@
         
         <!-- Checkbox remember me -->
         <span class="text" >
-          <input type="checkbox" name="check" id="check">
-          <label for="check">Remember Me</label>
+          <input type="checkbox" name="remember" id="remember">
+          <label for="remember">Remember Me</label>  
         </span>
 
         <!-- Tempat 2 tombol -->
