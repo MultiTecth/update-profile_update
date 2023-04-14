@@ -20,7 +20,7 @@ $atr = "alt='' width='50' class='rounded-circle'";
   <title>Post</title>
   <script src="./assets/ckeditor/ckeditor.js"></script>
   <link rel="stylesheet" href="./index.css">
-  <link rel="stylesheet" href="../css/boostrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous"> -->
 </head>
@@ -161,6 +161,6 @@ $atr = "alt='' width='50' class='rounded-circle'";
     console.error( error );
   });
   </script>
-   <script src="../js/base-component.js"></script>
+   <script src="/node_modules/bootstrap/js/src/base-component.js"></script>
 </body>
 </html>

@@ -51,9 +51,9 @@
   <title>Novel</title>
   <link rel="stylesheet" href="../../css/blog-main/novel/index.css">
   <link rel="stylesheet" href="../../css/nav.css">
+  <link rel="stylesheet" href="../../css/footer.css">
 
-  <link href="../../css/boostrap/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -311,10 +311,7 @@
 
   <!-- SCRIPT -->
   <!-- untuk dropdown -->
-  <script 
-    src="../../js/bootstrap.bundle.min.js"
-    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-    crossorigin="anonymous">
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js">
   </script>
 </body>
 

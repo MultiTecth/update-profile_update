@@ -17,7 +17,7 @@ $atr = "alt='' width='50' class='rounded-circle'";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Posted</title>
   <link rel="stylesheet" href="assets/css/index.css">  
-  <link rel="stylesheet" href="../../css/boostrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -50,7 +50,7 @@ $atr = "alt='' width='50' class='rounded-circle'";
       <div class="more-menu-cnt">
         <div class="more-menu">
           <div class="search">
-            <span class="icon"><img src="../homepage/assets/iconpack/searchpng.png" alt=""></span>
+            <span class="icon"><img src="../../img/assets/iconpack/searchpng.png" alt=""></span>
             <input type="search" placeholder="Search">
           </div>
           <a href="../form-upload.php"><button class="tweet-btn">Tweet</button></a>
@@ -69,10 +69,42 @@ $atr = "alt='' width='50' class='rounded-circle'";
                   <h6><?=$_SESSION['email']?></h6>
                 </span>
               </div>
-              <li><a class="dropdown-item" href="../profilpage/index.html"><button><div class="user-icon"><img src="../home-login-profil/assest/user.png" alt=""></div>Profile</button></a></li>
-              <li><a class="dropdown-item" href="#"><button><div class="saved"><img src="../home-login-profil/assest/save-instagram.png" alt=""></div>Libary</button></a></li>
-              <li class="dropdown-item" href=""><button><div class="rotate"><img src="../home-login-profil/assest/rotate.png" alt=""></div>Change Account</button></li>
-              <li class="dropdown-item"><a href="../login_me/sginup.html"><button><div class="exit"><img src="../home-login-profil/assest/Sign_out_squre_light.png" alt=""></div>Log Out</button></a></li>
+              <li>
+                <a class="dropdown-item" href="../../users/index.php">
+                  <button>
+                    <div class="user-icon">
+                      <img src="../../img/assets/user.png" alt="">
+                    </div>Profile
+                  </button>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  <button>
+                    <div class="saved">
+                      <img src="../../img/assets/save-instagram.png" alt="">
+                    </div>Libary
+                  </button>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="../../login/change_acc.php">
+                  <button>
+                    <div class="rotate">
+                      <img src="../../img/assets/rotate.png" alt="">
+                    </div>Change Account
+                  </button>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="../../login/logout.php">
+                  <button>
+                    <div class="exit">
+                      <img src="../../img/assets/Sign_out_squre_light.png" alt="">
+                    </div>Log Out
+                  </button>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -152,9 +184,7 @@ if(isset($result_users)){
       });
     });
   </script>
-  <script src="../../js/base-component.js"></script>
-  <script src="../../js/bootstrap.bundle.min.js"
-    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-    crossorigin="anonymous"></script>
+  <script src="/node_modules/bootstrap/js/dist/base-component.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

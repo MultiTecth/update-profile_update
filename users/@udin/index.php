@@ -82,7 +82,7 @@ if($id_user != 'guest'){
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Profil</title>
   <link rel="stylesheet" href="../../css/profile/index.css">
-  <link rel="stylesheet" href="../../css/boostrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -185,8 +185,6 @@ if($id_user != 'guest'){
     </div>
   </footer>
   <!-- SCRIPT -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-    crossorigin="anonymous"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
