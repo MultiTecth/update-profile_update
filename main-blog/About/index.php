@@ -49,7 +49,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Home Update Profil</title>
-  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="../../css/blog-main/about/index.css">
   <link rel="stylesheet" href="../../css/nav.css">
 
   <link href="../../css/boostrap/bootstrap.min.css" rel="stylesheet"
@@ -104,7 +104,7 @@
         <!-- Search & Tweet -->
         <div class="more-menu">
           <div class="search">
-            <span class="icon"><img src="../assets/iconpack/searchpng.png" alt=""></span>
+            <span class="icon"><img src="../../img/assets/iconpack/searchpng.png" alt=""></span>
             <input type="search" placeholder="Search">
           </div>
           <a href="../../tweet/form-upload.php" class="tweet-btn">Tweet</a>
@@ -119,32 +119,30 @@
           <div class="dropdown">
             <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
-              <!-- <img src="../assets/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50" class="rounded-circle"> -->
               <?=$photo_profile;?>
             </a>
             <ul class="dropdown-menu">
               <div class="profil-picture">
-                <!-- <img src="../assets/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50" class="rounded-circle"> -->
                 <?=$photo_profile;?>
                 <span class="username">
                   <h4>@<?=$user_name?></h4>
                   <h6><?=$email?></h6>
                 </span>
               </div>
-              <li><a class="dropdown-item" href="../../users/index.php"><button><div class="user-icon"><img src="../assets/user.png" alt=""></div>Profile</button></a></li>
+              <li><a class="dropdown-item" href="../../users/index.php"><button><div class="user-icon"><img src="../../img/assets/user.png" alt=""></div>Profile</button></a></li>
               <li>
-                <a class="dropdown-item" href="#"><button><div class="saved"><img src="../assets/save-instagram.png" alt=""></div>Favorite</button></a>
+                <a class="dropdown-item" href="#"><button><div class="saved"><img src="../../img/assets/save-instagram.png" alt=""></div>Favorite</button></a>
               </li>
               <li class="dropdown-item" href="">
                 <a href="../../login/index.php">
                 <button>
                   <div class="rotate">
-                    <img src="../assets/rotate.png" alt="">
+                    <img src="../../img/assets/rotate.png" alt="">
                   </div>Change Account
                 </button>
                 </a>
               </li>
-              <li class="dropdown-item"><a href="../../login/logout.php"><button><div class="exit"><img src="../assets/Sign_out_squre_light.png" alt=""></div>Log Out</button></a></li>
+              <li class="dropdown-item"><a href="../../login/logout.php"><button><div class="exit"><img src="../../img/assets/Sign_out_squre_light.png" alt=""></div>Log Out</button></a></li>
             </ul>
           </div>
         </div>
@@ -185,7 +183,7 @@
 
   <!-- Background -->
   <div class="jmb-container">
-    <img src="../assets/background.jpg" alt="">
+    <img src="../../img/assets/background.jpg" alt="">
   </div>
   <!-- Akhir Background -->
 
@@ -208,37 +206,37 @@
       <h2>OUR CREW</h2>
       <div class="crew-container">
         <div class="card-crew">
-          <img src="./picture/ddf6df1c6cb2c583b797ce4b9284100d.jpg" alt="">
+          <img src="../../img/picture/ddf6df1c6cb2c583b797ce4b9284100d.jpg" alt="">
           <h5>Shaquille</h5>
           <p>Back End Developer</p>
         </div>
 
         <div class="card-crew">
-          <img src="./picture/271c224b12b40b4f303a1ea94f5a5b6e.png" alt="">
+          <img src="../../img/picture/271c224b12b40b4f303a1ea94f5a5b6e.png" alt="">
           <h5>Raynato Liernardy</h5>
           <p>Full Stack Developer</p>
         </div>
 
         <div class="card-crew">
-          <img src="./picture/731d3962f8da8c9323873a26eaa86c03.png" alt="">
+          <img src="../../img/picture/731d3962f8da8c9323873a26eaa86c03.png" alt="">
           <h5>Sean Michael</h5>
           <p>Full Stack Developer</p>
         </div>
 
         <div class="card-crew">
-          <img src="./picture/5a56ca68e5c2ef90d7cd36b3b3ee8533.png" alt="">
+          <img src="../../img/picture/5a56ca68e5c2ef90d7cd36b3b3ee8533.png" alt="">
           <h5>Audrey Dwi Putry</h5>
           <p>UI / UX Designer</p>
         </div>
 
         <div class="card-crew">
-          <img src="./picture/62964ba8d5374d5775dd8d8bb13317d3 1.png" alt="">
+          <img src="../../img/picture/62964ba8d5374d5775dd8d8bb13317d3 1.png" alt="">
           <h5>Cheche Karina Putri Aslam</h5>
           <p>UI / UX Designer</p>
         </div>
 
         <div class="card-crew">
-          <img src="./picture/اسراء ♡ (@esra_a823) _ TikTok 1.png" alt="">
+          <img src="../../img/picture/اسراء ♡ (@esra_a823) _ TikTok 1.png" alt="">
           <h5>Muhammad Sabda Ramadhan</h5>
           <p>Front end developer</p>
         </div>

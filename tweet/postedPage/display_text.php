@@ -24,24 +24,24 @@ $atr = "alt='' width='50' class='rounded-circle'";
   <div class="jumbotron">
     <div class="navbar">
       <div class="nav-menu">
-        <div class="text">
+        <a class="text" href="../../main-blog/home/index.php">
           <h2>MultiBlog</h2>
-        </div>
+        </a>
         <!-- <div class="strip">|</div> -->
         <div class="list">
           <ul class="ul-list">
-            <li><a href="#">Home</a></li>
-            <li><a href="/About/index.html">About</a></li>
+            <li><a href="../../main-blog/home/index.php">Home</a></li>
+            <li><a href="../../main-blog/About/index.php">About</a></li>
             <div class="dropdown-center">
               <button class="btn text-white dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Browse
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/Home News/index.html">News</a></li>
-                <li><a class="dropdown-item" href="/Home Novel/index.html">Novel</a></li>
+                <li><a class="dropdown-item" href="../../main-blog/Home News/index.php">News</a></li>
+                <li><a class="dropdown-item" href="../../main-blog/Home Novel/index.php">Novel</a></li>
                 <!-- <li><a class="dropdown-item" href="#">Poems</a></li> -->
-                <li><a class="dropdown-item" href="/Home Short Story/index.html">Short Story</a></li>
+                <li><a class="dropdown-item" href="../../main-blog/Home Short Story/index.php">Short Story</a></li>
               </ul>
             </div>
           </ul>

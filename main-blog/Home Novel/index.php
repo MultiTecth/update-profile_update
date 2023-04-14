@@ -49,7 +49,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Novel</title>
-  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="../../css/blog-main/novel/index.css">
   <link rel="stylesheet" href="../../css/nav.css">
 
   <link href="../../css/boostrap/bootstrap.min.css" rel="stylesheet"
@@ -105,7 +105,7 @@
         <!-- Search & Tweet -->
         <div class="more-menu">
           <div class="search">
-            <span class="icon"><img src="../assets/iconpack/searchpng.png" alt=""></span>
+            <span class="icon"><img src="../../img/assets/iconpack/searchpng.png" alt=""></span>
             <input type="search" placeholder="Search">
           </div>
           <a href="../../tweet/form-upload.php" class="tweet-btn">Tweet</a>
@@ -120,32 +120,30 @@
           <div class="dropdown">
             <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
-              <!-- <img src="../assets/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50" class="rounded-circle"> -->
               <?=$photo_profile;?>
             </a>
             <ul class="dropdown-menu">
               <div class="profil-picture">
-                <!-- <img src="../assets/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50" class="rounded-circle"> -->
                 <?=$photo_profile;?>
                 <span class="username">
                   <h4>@<?=$user_name?></h4>
                   <h6><?=$email?></h6>
                 </span>
               </div>
-              <li><a class="dropdown-item" href="../../users/index.php"><button><div class="user-icon"><img src="../assets/user.png" alt=""></div>Profile</button></a></li>
+              <li><a class="dropdown-item" href="../../users/index.php"><button><div class="user-icon"><img src="../../img/assets/user.png" alt=""></div>Profile</button></a></li>
               <li>
-                <a class="dropdown-item" href="#"><button><div class="saved"><img src="../assets/save-instagram.png" alt=""></div>Favorite</button></a>
+                <a class="dropdown-item" href="#"><button><div class="saved"><img src="../../img/assets/save-instagram.png" alt=""></div>Favorite</button></a>
               </li>
               <li class="dropdown-item" href="">
                 <a href="../../login/index.php">
                 <button>
                   <div class="rotate">
-                    <img src="../assets/rotate.png" alt="">
+                    <img src="../../img/assets/rotate.png" alt="">
                   </div>Change Account
                 </button>
                 </a>
               </li>
-              <li class="dropdown-item"><a href="../../login/logout.php"><button><div class="exit"><img src="../assets/Sign_out_squre_light.png" alt=""></div>Log Out</button></a></li>
+              <li class="dropdown-item"><a href="../../login/logout.php"><button><div class="exit"><img src="../../img/assets/Sign_out_squre_light.png" alt=""></div>Log Out</button></a></li>
             </ul>
           </div>
         </div>
@@ -186,7 +184,7 @@
 
   <!-- Background -->
   <div class="jmb-container">
-    <img src="../assets/background.jpg" alt="">
+    <img src="../../img/assets/background.jpg" alt="">
   </div>
   <!-- Akhir Background -->
 
@@ -204,7 +202,7 @@
           <div class="card">
             <div class="image"><center>
               <img
-                src="./image/3819901-352-k318054 1.png"
+                src="../../img/novel/3819901-352-k318054 1.png"
                 alt="">
             </center></div>
             <div class="text">
@@ -217,7 +215,7 @@
           <!-- Card2 -->
           <div class="card">
             <div class="image">
-              <center><img src="./image/64018788-416-k34681 1.png" alt=""></center>
+              <center><img src="../../img/novel/64018788-416-k34681 1.png" alt=""></center>
             </div>
             <div class="text">
               <p>
@@ -230,7 +228,7 @@
           <div class="card">
             <div class="image"><center>
               <img
-                src="./image/77254287-352-k877858 1.png"
+                src="../../img/novel/77254287-352-k877858 1.png"
                 alt="">
             </center></div>
             <div class="text">
@@ -244,7 +242,7 @@
           <div class="card">
             <div class="image"><center>
               <img
-                src="./image/267373976-352-k308139 1.png"
+                src="../../img/novel/267373976-352-k308139 1.png"
                 alt="">
             </center></div>
             <div class="text">
