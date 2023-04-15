@@ -220,6 +220,9 @@ body{
     justify-content: center;
     text-decoration: none;
 }
+.follow:hover {
+    color: white;
+}
 .bio > span.bio{
     font-size:15px;
     letter-spacing:2px;

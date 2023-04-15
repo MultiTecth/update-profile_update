@@ -7,7 +7,9 @@ $sql_users = "SELECT id, user_name, email FROM users";
 $result_users = mysqli_query($conn, $sql_users);
 
 $src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
+$src2 = "<img src='../../img/thumbnail/contoh.jpg' alt='' width='100%' height='100%'>";
 $atr = "alt='' width='50' class='rounded-circle'";
+$atr2 = "alt='' width='100%' height='100%'";
 ?>
 
 <!doctype html>
@@ -127,7 +129,7 @@ if(isset($result_users)){
       $id_user = $row['id'];
       $uname = $row['user_name'];
       $email = $row['email'];
-      $sql_post = "SELECT title, description FROM blogs WHERE id_user = $id_user ORDER BY id DESC";
+      $sql_post = "SELECT * FROM blogs WHERE id_user = $id_user ORDER BY id DESC";
       $result_post = mysqli_query($conn, $sql_post);
       if(mysqli_num_rows($result_post)){
         while($col = mysqli_fetch_array($result_post)){
@@ -142,17 +144,30 @@ if(isset($result_users)){
         </div> <!--end profil-->
         <div class="blog-text">
           <div id="editor">
-            <div class="title"><h1 style="font-weight: bolder;"><?=$col['title']?></h3></div>
-            <div id="content"><?=$col['description']?></div>
-            <div class="image"><img src="../home-login-profil/assest/logout.png" alt=""></div>  
+
+            <div class="title">
+              <h1 style="font-weight: bolder;"><?=$col['title']?></h1>
+            </div>
+            <center>
+            <div class="image">
+              <?=thumbnail($col['id'], $src2, $atr2)?>
+            </div> 
+            </center>
+
+            <div id="content">
+              <?=$col['description']?>
+            </div>
+
             <div class="tags" id="tags">
               <span id="tag">#Lorem, ipsum.</span>
               <span id="tag">#Lorem, ipsum.</span>
               <span id="tag">#Lorem, ipsum.</span>
             </div>
+
             <div class="category">
               <span class="category" id="cat">News</span>
             </div>
+            
           </div>
         </div>
         <div class="bottom-menu">

@@ -3,7 +3,6 @@
 // FILE INI TERKONEKSI LANGSUNG DENGAN FILE readonly.php
 session_start();
 
-
 // untuk menggunakan function profile
 include "../../function.php";
 
@@ -27,28 +26,52 @@ $src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>
 $atr = "alt='' width='50' class='rounded-circle'";
 
 
-$pengguna = $lihat = false;
-if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
-  $user_name = $_SESSION['user_name'];
-  // cek follow
-  $id_user = $_SESSION['id'];
-  $id_read = $id;
-  $sql_follow = "SELECT * FROM follow WHERE id_user = $id_user AND id_read = $id_read";
-  $_SESSION['read_id'] = $id_read;
-  $sql_friend = "SELECT * FROM follow WHERE id_user = $id_read AND id_read = $id_user";
-  $result_follow = mysqli_query($conn, $sql_follow);
-  $result_friend = mysqli_query($conn, $sql_friend);
-
-  if(mysqli_num_rows($result_follow) > 0){
-    $pengguna = true;
-  }
+if( isset($_COOKIE['id']) && isset($_COOKIE['key']) ){
   
-  if(mysqli_num_rows($result_friend) > 0){
-    $lihat = true;
+  // ambil data untuk ditampilkan di profile home
+  $id_user = $_COOKIE['id'];
+  $key = $_COOKIE['key'];
+  
+  $result = mysqli_query($conn, "SELECT * FROM users WHERE id = $id_user");
+  $row = mysqli_fetch_assoc($result);
+
+  // cek cookie dan username
+  if( $key === hash('sha256', $row['user_name']) ){
+    $_SESSION['login'] = true;
+    $user_name = $row['user_name'];
   }
+
+} else if(isset($_SESSION['login'])){
+
+  $user_name = $_SESSION['user_name'];
+  $id_user = $_SESSION['id'];
+
 } else {
   $user_name = 'guest';
   $id_user = 'guest';
+}
+  
+if(isset($_POST['follow'])){
+  $check = checkfollow($id_user, $id);  
+  if(mysqli_num_rows($check) === 0){
+    $hasil = "INSERT INTO follow(id_user, id_read) VALUES ($id_user, $id)";
+    mysqli_query($conn, $hasil);
+  }
+}   
+if(isset($_POST['friend']) || isset($_POST['followed'])){
+  $hasil = "DELETE FROM follow WHERE id_user = $id_user AND id_read = $id";
+  mysqli_query($conn, $hasil);
+} 
+
+if($id_user != 'guest'){
+  $id_read = $id;
+
+  $result_follow = checkfollow($id_user, $id_read);
+  $result_friend = checkfollow($id_read, $id_user);
+  
+  $pengguna = mysqli_num_rows($result_follow) > 0;
+  
+  $lihat = mysqli_num_rows($result_friend) > 0;
 }
 
 ?>
@@ -61,7 +84,7 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Profil</title>
   <link rel="stylesheet" href="../../css/profile/index.css">
-  <link rel="stylesheet" href="../../css/boostrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -83,9 +106,9 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
 
         <div class="profil">
           <div class="profile-btn">
-            <?php if(isset($_SESSION['id']) && !empty($_SESSION['id'])){?>
+            <?php if(isset($_SESSION['login'])){?>
             <?=profile($_SESSION['id'], $src, $atr);?>
-            <div class="profil-text"><?=$_SESSION['user_name']?></div>
+            <div class="profil-text">@<?=$user_name?></div>
             <?php } else {?>
             <?=$src?>
             <div class="profil-text">guest</div>
@@ -109,13 +132,13 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
 
   <div class="container-content">
      <div class="content">
-      <div class="profil-card">
+      <form class="profil-card" method="post" action="">
         <div class="profil-box">
-        <div class="profil-picture">
-          <?=profile($id, $src, $atr)?>
-        </div> <!-- profil end-->
+          <div class="profil-picture">
+            <?=profile($id, $src, $atr)?>
+          </div> <!-- profil end-->
           <div class="username bio">
-            <h3><?=$uname?></h3>
+            <h3>@<?=$uname?></h3>
             <div class="bio">
               <span class="bio">
                 <?=$bio?>
@@ -128,17 +151,23 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
           </div> <!-- User-email end-->
         </div><!-- box end-->
         <?php if($user_name == $dir){?>
-        <a class="edit-profil" href="../profile_update/index.php">
-          <button>Edit Profil</button>
-        </a><!-- edit profil end-->
+          <a class="follow" href="../profile_update/index.php">
+            Edit Profil
+          </a><!-- edit profil end-->
         <?php } else if ($pengguna && $lihat) {?>
-          <a class="follow" href="../../other/unfollow.php">Friend</a>
+          <button class="follow" href="../../other/unfollow.php" name="friend">
+            Friend
+          </button>
         <?php } else if ($pengguna) {?>
-          <a class="follow" href="../../other/unfollow.php">Followed</a>
+          <button class="follow" href="../../other/unfollow.php" name="followed">
+            Followed
+          </button>
         <?php } else if ($id_user != 'guest'){?>
-        <a class="follow" href="../../other/follow.php">Follow</a>
+          <button class="follow" href="../../other/follow.php" name="follow">
+            Follow
+          </button>
         <?php }?>
-      </div> <!-- Profil card end -->
+      </form> <!-- Profil card end -->
 
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -164,8 +193,6 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
     </div>
   </footer>
   <!-- SCRIPT -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-    crossorigin="anonymous"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

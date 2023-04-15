@@ -2,7 +2,6 @@
 session_start();
 
 include '../function.php';
-$url = htmlspecialchars($_SERVER['HTTP_REFERER']);
 $id = $_SESSION['id'];
 if(empty($id)){
   header("location: ../main-blog/home/");
@@ -26,6 +25,11 @@ $atr = "alt='' width='50' class='rounded-circle'";
 </head>
 
 <body>
+  <?php if(isset($_GET['error'])):?>
+    <script>
+      alert('<?=$_GET['error']?>');
+    </script>
+  <?php endif;?>
   <div class="jumbotron">
     <div class="navbar">
       <h2>MultiBlog</h2>
@@ -61,18 +65,30 @@ $atr = "alt='' width='50' class='rounded-circle'";
     </div>
   </div>
   <div class="container-content">
-    <a href="<?=$url?>">
+    <a href="../main-blog/home/">
     <div class="back">
       <img src="./assets/icon/Expand_left_double.png" alt="">
       <h2>Back</h2>
     </div>
     </a>
-    <form class="content" method="post" action="upload.php">
+
+    <form class="content" method="post" action="upload.php" enctype="multipart/form-data">
+
       <h2>Buat Postingan Baru</h2>
       <center><div class="line"></div></center>
       <div class="content-box">
-        <div class="cover">
-          <img src="">  
+        <div class="btn-upload">
+          <!-- <input type="file" name="fileupload" id="img"> -->
+          
+          <input type="file" class="form-control" id="img" placeholder="Enter password" name="my_image"/>
+
+          <button class="btn">
+            
+            <div id="selectedBanner"></div>
+
+            <img src="../img/add_media.png" class="media" alt="ubah gambar profile">
+            
+          </button>
         </div>
         <div class="post-page">
           <div class="profil">
@@ -157,10 +173,45 @@ $atr = "alt='' width='50' class='rounded-circle'";
         { name: 'Black Font', element: 'span', styles: { 'color': 'black' } }
       ]
     })
-  .catch( error => {
-    console.error( error );
-  });
+    .catch( error => {
+      console.error( error );
+    });
   </script>
-   <script src="/node_modules/bootstrap/js/src/base-component.js"></script>
+  <script src="/node_modules/bootstrap/js/src/base-component.js"></script>
+
+  
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<!-- agar bisa upload gambar -->
+<script>
+  var selDiv = "";
+  var storedFiles = [];
+  $(document).ready(function () {
+    $("#img").on("change", handleFileSelect);
+    selDiv = $("#selectedBanner");
+  });
+
+  function handleFileSelect(e) {
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+    filesArr.forEach(function (f) {
+      if (!f.type.match("image.*")) {
+        return;
+      }
+      storedFiles.push(f);
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var html =
+          '<img src="' +
+          e.target.result +
+          "\" data-file='" +
+          f.name +
+          "' class='avatar rounded lg' alt='Category Image' height='200px' width='200px'>";
+        selDiv.html(html);
+      };
+      reader.readAsDataURL(f);
+    });
+  }
+</script>
 </body>
 </html>

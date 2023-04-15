@@ -241,6 +241,27 @@
       <div class="title">
         <h3>For You</h3>
       </div>
+      
+      <div class="news">
+        <div class="news-title">
+          <h3>FOLLOWED </h3><span class="line"></span>
+        </div>
+        <div class="card-container">
+          <!-- Card1 -->
+          <div class="card">
+            <div class="image"><img
+                src="../../img/assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
+                alt=""></div>
+            <div class="text">
+              <p>
+                Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
+              </p>
+            </div>
+          </div>
+          <!-- Close Card -->
+        </div> 
+      </div>
+
       <div class="news">
         <div class="news-title">
           <h3>NEWS </h3><span class="line"></span>
@@ -281,91 +302,92 @@
           </div>
           <!-- Close Card -->
         </div> <!-- Closing tag container card -->
-        <div class="novel">
-          <div class="novel-title">
-            <h3>NOVEl </h3><span class="line"></span>
-          </div>
-          <div class="card-container">
-            <!-- Card1 -->
-            <div class="card">
-              <div class="image"><img
-                  src="../../img/assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
-                  alt=""></div>
-              <div class="text">
-                <p>
-                  Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
-                </p>
-              </div>
-            </div>
-
-            <!-- Card2 -->
-            <div class="card">
-              <div class="image"><img src="../../img/assets/imagenews/56-1-1628768698 1.png" alt=""></div>
-              <div class="text">
-                <p>
-                  Kebijakan Politik Luar Negeri Perekonomian Indonesia
-                </p>
-              </div>
-            </div>
-
-            <!-- Card3 -->
-            <div class="card">
-              <div class="image"><img
-                  src="../../img/assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png"
-                  alt=""></div>
-              <div class="text">
-                <p>
-                  Ramai-ramai Tolak Timnas Israel ke Indonesiah
-                </p>
-              </div>
-            </div>
-            <!-- Close Card -->
-          </div> <!-- Closing tag container card -->
-        </div>
-
-
-        <div class="short-story">
-          <div class="short-story-title">
-            <h3>Short Story</h3><span class="line"></span>
-          </div>
-          <div class="card-container">
-            <!-- Card1 -->
-            <div class="card">
-              <div class="image"><img
-                  src="../../img/assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
-                  alt=""></div>
-              <div class="text">
-                <p>
-                  Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
-                </p>
-              </div>
-            </div>
-
-            <!-- Card2 -->
-            <div class="card">
-              <div class="image"><img src="../../img/assets/imagenews/56-1-1628768698 1.png" alt=""></div>
-              <div class="text">
-                <p>
-                  Kebijakan Politik Luar Negeri Perekonomian Indonesia
-                </p>
-              </div>
-            </div>
-
-            <!-- Card3 -->
-            <div class="card">
-              <div class="image"><img
-                  src="../../img/assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png"
-                  alt=""></div>
-              <div class="text">
-                <p>
-                  Ramai-ramai Tolak Timnas Israel ke Indonesiah
-                </p>
-              </div>
-            </div>
-            <!-- Close Card -->
-          </div> <!-- Closing tag container card -->
-        </div> <!-- Closing tag Short Story -->
       </div>
+        
+      <div class="novel">
+        <div class="novel-title">
+          <h3>NOVEl </h3><span class="line"></span>
+        </div>
+        <div class="card-container">
+          <!-- Card1 -->
+          <div class="card">
+            <div class="image"><img
+                src="../../img/assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
+                alt=""></div>
+            <div class="text">
+              <p>
+                Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
+              </p>
+            </div>
+          </div>
+
+          <!-- Card2 -->
+          <div class="card">
+            <div class="image"><img src="../../img/assets/imagenews/56-1-1628768698 1.png" alt=""></div>
+            <div class="text">
+              <p>
+                Kebijakan Politik Luar Negeri Perekonomian Indonesia
+              </p>
+            </div>
+          </div>
+
+          <!-- Card3 -->
+          <div class="card">
+            <div class="image"><img
+                src="../../img/assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png"
+                alt=""></div>
+            <div class="text">
+              <p>
+                Ramai-ramai Tolak Timnas Israel ke Indonesiah
+              </p>
+            </div>
+          </div>
+          <!-- Close Card -->
+        </div> <!-- Closing tag container card -->
+      </div>
+
+
+      <div class="short-story">
+        <div class="short-story-title">
+          <h3>Short Story</h3><span class="line"></span>
+        </div>
+        <div class="card-container">
+          <!-- Card1 -->
+          <div class="card">
+            <div class="image"><img
+                src="../../img/assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
+                alt=""></div>
+            <div class="text">
+              <p>
+                Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
+              </p>
+            </div>
+          </div>
+
+          <!-- Card2 -->
+          <div class="card">
+            <div class="image"><img src="../../img/assets/imagenews/56-1-1628768698 1.png" alt=""></div>
+            <div class="text">
+              <p>
+                Kebijakan Politik Luar Negeri Perekonomian Indonesia
+              </p>
+            </div>
+          </div>
+
+          <!-- Card3 -->
+          <div class="card">
+            <div class="image"><img
+                src="../../img/assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png"
+                alt=""></div>
+            <div class="text">
+              <p>
+                Ramai-ramai Tolak Timnas Israel ke Indonesiah
+              </p>
+            </div>
+          </div>
+          <!-- Close Card -->
+        </div> <!-- Closing tag container card -->
+      </div> <!-- Closing tag Short Story -->
     </div> 
     <!-- Akhir Beranda -->
 

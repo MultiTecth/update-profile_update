@@ -72,10 +72,6 @@ body{
     gap:20px;
     align-items:center;
 }
-.cover{
-    width: 300px;
-    height:400px; 
-}
 .post-page{
     background: #001029;
     /* border: 1px solid #000000; */
@@ -232,6 +228,7 @@ body{
     text-align: center;
     color: white;
     position: fixed;
+    z-index: 999;
     bottom: 0;
     right: 0;
     left: 0;
@@ -239,4 +236,73 @@ body{
 
 .footer-bottom p{
     font-weight: 200;
+}
+
+.btn-upload {
+    margin-top: -500px;
+    width: 300px;
+    height:400px; 
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+.btn-upload input[type=file] {
+    position: absolute;
+    opacity: 0;
+    z-index: 5;
+    max-width: 100%;
+    height: 100%;
+    display: block;
+}
+.btn-upload .btn{
+    padding: 8px 20px;
+    background:transparent;
+    border:none;
+    color: #fff;
+    border: 0;
+    position: relative;
+    background-color: #000712;
+    z-index: 1;
+    width: 300px;
+    height:400px; 
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+}
+.btn-upload:hover input {
+    cursor:pointer;
+}
+.btn-upload .btn > *{
+    width: 300px;
+    height:400px; 
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    opacity: 1;
+    z-index: 1;
+    position: absolute;
+}
+
+#selectedBanner {
+    background-color: #000712;
+}
+
+#selectedBanner:empty {
+    display: none;
+}
+
+#selectedBanner > *{
+    width: 300px;
+    height:400px; 
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+}
+.btn .media {
+    opacity: 0;
+}
+.btn-upload:hover .media{
+    cursor:pointer;
+    opacity: .7;
+    transition: .2s;
 }

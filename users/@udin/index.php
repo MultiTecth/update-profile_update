@@ -3,7 +3,6 @@
 // FILE INI TERKONEKSI LANGSUNG DENGAN FILE readonly.php
 session_start();
 
-
 // untuk menggunakan function profile
 include "../../function.php";
 
@@ -27,7 +26,6 @@ $src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>
 $atr = "alt='' width='50' class='rounded-circle'";
 
 
-$pengguna = $lihat = false;
 if( isset($_COOKIE['id']) && isset($_COOKIE['key']) ){
   
   // ambil data untuk ditampilkan di profile home
@@ -52,24 +50,28 @@ if( isset($_COOKIE['id']) && isset($_COOKIE['key']) ){
   $user_name = 'guest';
   $id_user = 'guest';
 }
+  
+if(isset($_POST['follow'])){
+  $check = checkfollow($id_user, $id);  
+  if(mysqli_num_rows($check) === 0){
+    $hasil = "INSERT INTO follow(id_user, id_read) VALUES ($id_user, $id)";
+    mysqli_query($conn, $hasil);
+  }
+}   
+if(isset($_POST['friend']) || isset($_POST['followed'])){
+  $hasil = "DELETE FROM follow WHERE id_user = $id_user AND id_read = $id";
+  mysqli_query($conn, $hasil);
+} 
 
 if($id_user != 'guest'){
   $id_read = $id;
-  $_SESSION['read_id'] = $id_read;
 
-  $sql_follow = "SELECT * FROM follow WHERE id_user = $id_user AND id_read = $id_read";
-  $sql_friend = "SELECT * FROM follow WHERE id_user = $id_read AND id_read = $id_user";
-
-  $result_follow = mysqli_query($conn, $sql_follow);
-  $result_friend = mysqli_query($conn, $sql_friend);
+  $result_follow = checkfollow($id_user, $id_read);
+  $result_friend = checkfollow($id_read, $id_user);
   
-  if(mysqli_num_rows($result_follow) > 0){
-    $pengguna = true;
-  }
+  $pengguna = mysqli_num_rows($result_follow) > 0;
   
-  if(mysqli_num_rows($result_friend) > 0){
-    $lihat = true;
-  }
+  $lihat = mysqli_num_rows($result_friend) > 0;
 }
 
 ?>
@@ -130,11 +132,11 @@ if($id_user != 'guest'){
 
   <div class="container-content">
      <div class="content">
-      <div class="profil-card">
+      <form class="profil-card" method="post" action="">
         <div class="profil-box">
-        <div class="profil-picture">
-          <?=profile($id, $src, $atr)?>
-        </div> <!-- profil end-->
+          <div class="profil-picture">
+            <?=profile($id, $src, $atr)?>
+          </div> <!-- profil end-->
           <div class="username bio">
             <h3>@<?=$uname?></h3>
             <div class="bio">
@@ -149,17 +151,23 @@ if($id_user != 'guest'){
           </div> <!-- User-email end-->
         </div><!-- box end-->
         <?php if($user_name == $dir){?>
-        <a class="edit-profil" href="../profile_update/index.php">
-          <button>Edit Profil</button>
-        </a><!-- edit profil end-->
+          <a class="follow" href="../profile_update/index.php">
+            Edit Profil
+          </a><!-- edit profil end-->
         <?php } else if ($pengguna && $lihat) {?>
-          <a class="follow" href="../../other/unfollow.php">Friend</a>
+          <button class="follow" href="../../other/unfollow.php" name="friend">
+            Friend
+          </button>
         <?php } else if ($pengguna) {?>
-          <a class="follow" href="../../other/unfollow.php">Followed</a>
+          <button class="follow" href="../../other/unfollow.php" name="followed">
+            Followed
+          </button>
         <?php } else if ($id_user != 'guest'){?>
-        <a class="follow" href="../../other/follow.php">Follow</a>
+          <button class="follow" href="../../other/follow.php" name="follow">
+            Follow
+          </button>
         <?php }?>
-      </div> <!-- Profil card end -->
+      </form> <!-- Profil card end -->
 
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
