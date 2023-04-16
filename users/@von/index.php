@@ -270,7 +270,7 @@ if(mysqli_num_rows($result_follow1) > 0){
             while($usr = mysqli_fetch_array($result_data_follow)){
           ?>
             <!-- Card -->
-            <div class="card">
+            <a class="card" href="../@<?=$usr['user_name']?>">
               <div class="img-card">
                 <?=profile($usr['id'], $src, $atr)?>
               </div>
@@ -278,7 +278,7 @@ if(mysqli_num_rows($result_follow1) > 0){
                 <div class="username"><p><?=$usr['user_name']?></p></div>
                 <div class="text"><?=$usr['bio']?></div>
               </div>
-            </div> <!--End Card-->
+            </a> <!--End Card-->
 <?php }}}}}}}?>
 
           </div> <!--End Container-libary-tab-->
