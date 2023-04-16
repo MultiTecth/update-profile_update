@@ -84,7 +84,7 @@ if($id_user != 'guest'){
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Profil</title>
   <link rel="stylesheet" href="../../css/profile/index.css">
-  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../bantuan/bootstrap.min.css">
 </head>
 
 <body>
@@ -193,6 +193,6 @@ if($id_user != 'guest'){
     </div>
   </footer>
   <!-- SCRIPT -->
-  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../bantuan/bootstrap.bundle.min.js"></script>
 </body>
 </html>

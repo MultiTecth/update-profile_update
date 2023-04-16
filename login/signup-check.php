@@ -114,7 +114,7 @@ if (isset($_POST['uname']) && isset($_POST['pw']) && isset($_POST['name']) && is
       else {
         // Jika ukuran gambar dibawah 70kb dan diatas 500kb
         // Kembali ke halaman sebelumnya
-        if($img_name < 70000 && $img_size > 500000){
+        if($img_size < 70000 && $img_size > 500000){
           $em = "ukuran image nya harus dibawah 500kb dan diatas 70kb";
           header("location: register.php?error=$em");
         } 

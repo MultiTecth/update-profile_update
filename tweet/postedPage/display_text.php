@@ -19,7 +19,7 @@ $atr2 = "alt='' width='100%' height='100%'";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Posted</title>
   <link rel="stylesheet" href="assets/css/index.css">  
-  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../bantuan/bootstrap.min.css">
 </head>
 
 <body>
@@ -199,7 +199,7 @@ if(isset($result_users)){
       });
     });
   </script>
-  <script src="/node_modules/bootstrap/js/dist/base-component.js"></script>
-  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../bantuan/base-component.js"></script>
+  <script src="../../bantuan/bootstrap.bundle.min.js"></script>
 </body>
 </html>

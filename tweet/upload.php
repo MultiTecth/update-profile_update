@@ -18,13 +18,15 @@ trim(str_replace('&nbsp', '', strip_tags($_POST['editor']))) == '')
   $title = $_POST['title'];
   $id_user = $_SESSION['id'];
   
+  $date = date('Y-m-d H:i:s');
   if($img_name == ''){  
-    $query = mysqli_query($conn, "INSERT INTO blogs (title, description, id_user) VALUES ('$title','$text', $id_user)");
+    $sql = "INSERT INTO blogs (title, description, id_user, tgl_pembuatan) VALUE ('$title','$text', $id_user, '$date')";
+    $query = mysqli_query($conn, $sql);
   } else {
     // Jika ukuran gambar dibawah 70kb dan diatas 500kb
     // Kembali ke halaman sebelumnya
-    if($img_name < 70000 && $img_size > 500000){
-      $em = "ukuran image nya harus dibawah 500kb dan diatas 70kb";
+    if($img_size > 8000000){
+      $em = "ukuran image nya harus dibawah 8MB";
       header("location: form-upload.php?error=$em");
     } 
     // Jika sesuai ukurannya
@@ -40,8 +42,10 @@ trim(str_replace('&nbsp', '', strip_tags($_POST['editor']))) == '')
         // enksripsi gambar
         $datagambar = addslashes(file_get_contents($tmp_name));
 
+        $sql = "INSERT INTO blogs (thumbnail, title, description, id_user, tgl_pembuatan) 
+        VALUE ('$datagambar', '$title','$text', $id_user, '$date')";
         // simpan gambar dan data2 yang lain ke database
-        $query = mysqli_query($conn, "INSERT INTO blogs (thumbnail, title, description, id_user) VALUES ('$datagambar', '$title','$text', $id_user)");
+        $query = mysqli_query($conn, $sql);
       } 
       // Jika jenis file tidak sesuai
       else {
@@ -57,7 +61,7 @@ trim(str_replace('&nbsp', '', strip_tags($_POST['editor']))) == '')
     header("location: postedPage/display_text.php");
     exit();
   } else {
-    header("Location: form-upload.php?error=ERROR");
+    header("Location: form-upload.php");
     exit;
   }
 

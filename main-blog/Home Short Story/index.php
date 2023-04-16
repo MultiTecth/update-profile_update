@@ -52,7 +52,7 @@
   <link rel="stylesheet" href="../../css/blog-main/short-story/index.css">
   <link rel="stylesheet" href="../../css/nav.css">
   <link rel="stylesheet" href="../../css/footer.css">
-  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../bantuan/bootstrap.min.css">
 </head>
 
 <body>
@@ -309,7 +309,7 @@
 
   <!-- SCRIPT -->
   <!-- untuk dropdown -->
-  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js">
+  <script src="../../bantuan/bootstrap.bundle.min.js">
   </script>
 </body>
 

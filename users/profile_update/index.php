@@ -36,7 +36,7 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Edit Profil</title>
   <link rel="stylesheet" href="./assets/root.css">
-  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../bantuan/bootstrap.min.css">
 </head>
 
 <body>
@@ -141,13 +141,13 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
     </div>
   </footer>
   <!-- SCRIPT -->
-  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../bantuan/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
       $("#image id").click(function(){
         $("#input id").click();
       });
     </script>
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../bantuan/jquery.min.js"></script>
 <script>
   var selDiv = "";
   var storedFiles = [];

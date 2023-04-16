@@ -114,7 +114,7 @@ session_start();
     </div>
   </div>
 <!-- SCRIPT -->
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../bantuan/jquery.min.js"></script>
 
 <!-- agar bisa upload gambar -->
 <script>
