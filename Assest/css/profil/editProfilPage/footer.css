@@ -1,0 +1,15 @@
+/* Footer */
+.footer-bottom {
+  margin-top: 10px;
+  background: #001331;
+  width: 100%;
+  height: 50px;
+  padding: 15px 0;
+  text-align: center;
+  color: white;
+}
+.footer-bottom p {
+  font-weight: 200;
+}
+
+/*# sourceMappingURL=footer.css.map */

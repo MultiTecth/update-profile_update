@@ -3,8 +3,8 @@ session_start();
 
 include '../../function.php';
 
-$sql_users = "SELECT id, user_name, email FROM users";
-$result_users = mysqli_query($conn, $sql_users);
+$sql_blogs = "SELECT * FROM blogs ORDER BY tgl_pembuatan DESC";
+$result_blogs = mysqli_query($conn, $sql_blogs);
 
 $src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
 $src2 = "<img src='../../img/thumbnail/contoh.jpg' alt='' width='100%' height='100%'>";
@@ -123,39 +123,41 @@ $atr2 = "alt='' width='100%' height='100%'";
       <!-- box content -->
 
 <?php 
-if(isset($result_users)){
-  if(mysqli_num_rows($result_users)){
-    while($row = mysqli_fetch_array($result_users)){
-      $id_user = $row['id'];
-      $uname = $row['user_name'];
-      $email = $row['email'];
-      $sql_post = "SELECT * FROM blogs WHERE id_user = $id_user ORDER BY id DESC";
-      $result_post = mysqli_query($conn, $sql_post);
-      if(mysqli_num_rows($result_post)){
-        while($col = mysqli_fetch_array($result_post)){
+if(isset($result_blogs)){
+  
+  if(mysqli_num_rows($result_blogs)){
+    while($row = mysqli_fetch_array($result_blogs)){
+      $id_user = $row['id_user'];
+      $sql_user = "SELECT id, user_name, email FROM users WHERE id = $id_user";
+      $result_user = mysqli_query($conn, $sql_user);
+      if(mysqli_num_rows($result_user)){
+        while($col = mysqli_fetch_array($result_user)){
+          if($col['id'] == $row['id_user']);
 ?>
       <div class="box-content">
         <div class="profil-picture">
-          <?=profile($id_user, $src, $atr)?>
+          <?=profile($col['id'], $src, $atr);?>
+
           <span class="username">
-            <h4><?=$uname?></h4>
-            <h6><?=$email?></h6>
+            <h4><?=$col['user_name']?></h4>
+            <h6><?=$col['email']?></h6>
           </span>
         </div> <!--end profil-->
         <div class="blog-text">
           <div id="editor">
 
             <div class="title">
-              <h1 style="font-weight: bolder;"><?=$col['title']?></h1>
+              <h1 style="font-weight: bolder;"><?=$row['title']?></h1>
+              <h2>Dibuat: <?=$row['tgl_pembuatan']?></h2>
             </div>
             <center>
             <div class="image">
-              <?=thumbnail($col['id'], $src2, $atr2)?>
+              <?=thumbnail($row['id'], $src2, $atr2)?>
             </div> 
             </center>
 
             <div id="content">
-              <?=$col['description']?>
+              <?=$row['description']?>
             </div>
 
             <div class="tags" id="tags">

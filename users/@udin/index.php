@@ -74,36 +74,46 @@ if($id_user != 'guest'){
   $lihat = mysqli_num_rows($result_friend) > 0;
 }
 
+$sql_blogs = "SELECT * FROM blogs WHERE id_user = $id ORDER BY tgl_pembuatan DESC";
+$result_blogs = mysqli_query($conn, $sql_blogs);
+$src2 = "<img src='../../img/thumbnail/contoh.jpg' alt='' width='50%' height='50%'>";
+$atr2 = "alt='' width='50%' height='50%'";
+
+$sql_follow1 = "SELECT * FROM follow WHERE id_user = $id";
+$result_follow1 = mysqli_query($conn, $sql_follow1);
+
 ?>
 
 <!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8"> 
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Profil</title>
-  <link rel="stylesheet" href="../../css/profile/index.css">
+  <link rel="stylesheet" href="../../Assest/css/profil/profilpage/index.css">
   <link rel="stylesheet" href="../../bantuan/bootstrap.min.css">
+  
+  <script src="../../bantuan/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
-
   <div class="jumbotron">
     <div class="navbar">
-
       <div class="nav-menu">
         <div class="text">
-          <a href="../../main-blog/home/">
-          <h2>MultiBlog</h2></a>
+          <a href="../../main-blog/home/"><h2>MultiBlog</h2></a>
         </div>
       </div>
-
       <div class="more-menu-cnt">
         <div class="more-menu">
-          <a href="../../tweet/form-upload.php" class="tweet-btn">Tweet</a>
-        </div> 
-
+          <!-- <div class="search">
+            <span class="" alt=""><img src="/Home/homepage/assets/iconpack/searchpng.png" alt=""></span>
+            <input type="search" placeholder="Search">
+          </div> -->
+          <a href="../../tweet/form-upload.php"><button class="tweet-btn">Tweet</button></a>
+        </div>
         <div class="profil">
           <div class="profile-btn">
             <?php if(isset($_SESSION['login'])){?>
@@ -118,25 +128,23 @@ if($id_user != 'guest'){
       </div>
     </div>
   </div>
-
-  <div class="box">
-    <a href="../../main-blog/home/">
-      <div class="icon-back"><img src="../../img/Expand_left_double.png" alt=""></div>
-      <h3>Back</h3>
-    </a>
-  </div>
-  
   <div class="jmb-container">
-    <img src="../../img/bg.jpg" alt="">
+    <div class="box">
+      <a href="../../main-blog/home/">
+        <div class="icon-back"><img src="../../Assest/icon/Back.png" alt=""></div>
+        <!-- <h3>Back</h3> -->
+      </a>
+    </div> 
+  </div>
   </div>
 
   <div class="container-content">
      <div class="content">
       <form class="profil-card" method="post" action="">
         <div class="profil-box">
-          <div class="profil-picture">
-            <?=profile($id, $src, $atr)?>
-          </div> <!-- profil end-->
+        <div class="profil-picture">
+          <?=profile($id, $src, $atr)?>
+        </div> <!-- profil end-->
           <div class="username bio">
             <h3>@<?=$uname?></h3>
             <div class="bio">
@@ -176,14 +184,105 @@ if($id_user != 'guest'){
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="libary" data-bs-toggle="tab" data-bs-target="#libary-tab-pane" type="button" role="tab" aria-controls="libary-tab-pane" aria-selected="false">Libary</button>
         </li>
-        <!-- <li class="nav-item" role="presentation">
+        <li class="nav-item" role="presentation">
           <button class="nav-link" id="friend" data-bs-toggle="tab" data-bs-target="#friend-tab-pane" type="button" role="tab" aria-controls="friend-tab-pane" aria-selected="false">Friend</button>
-        </li> -->
+        </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">Home</div>
-        <div class="tab-pane fade" id="libary-tab-pane" role="tabpanel" aria-labelledby="libary-tab" tabindex="0">Libary</div>
-        <!-- <div class="tab-pane fade" id="friend-tab-pane" role="tabpanel" aria-labelledby="friend-tab" tabindex="0">Friend</div> -->
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+          <!-- Home Tab -->
+          <div class="home-tab-container">
+<!-- Copy Here -->     
+
+<?php 
+if(mysqli_num_rows($result_blogs) > 0){
+  while($row = mysqli_fetch_array($result_blogs)){
+?>
+            <div class="home-tab-profil">
+              <?=profile($id, $src, $atr)?>
+              <div class="home-tab-profile-text">
+                <h3><?=$uname?></h3>
+                <span class="username-id">
+                  <?=$email?>
+                </span>
+              </div>
+            </div><!--home tab profile end-->
+            <div class="date-time">
+              <p><?=$row['tgl_pembuatan']?><span id="tanggal"></span></p>
+            </div>
+            <div class="post-content">
+              <p id="text"><?=$row['title']?></p>
+              <span class="picture" id="post-picture">
+                <?=thumbnail($row['id'], $src2, $atr2)?>
+              </span>
+              <div class="tags">
+                <ul>
+                  <li><a href="">#Hello</a></li>
+                  <li><a href="">#Hello</a></li>
+                  <li><a href="">#Hello</a></li>
+                </ul>
+                <span class="tagline">NEWS</span>
+              </div>
+            </div> <!-- end Home tab / content-->
+<?php }}?>
+    
+          </div>
+        </div>
+        <div class="tab-pane fade" id="libary-tab-pane" role="tabpanel" aria-labelledby="libary-tab" tabindex="0">
+          <!-- Container -->
+          <div class="container-libary-tab">
+            <!-- Card -->
+            <div class="card">
+              <div class="img-card"><img src="../../Assest/Image Novel/3819901-352-k318054 1.png" alt=""></div>
+              <p>Lorem ipsum dolor</p>
+              <div class="saved-icon"><a href=""><img src="../../Assest/icon/save-instagram.png" alt=""></a></div>
+            </div> <!--End Card-->
+
+            <div class="card">
+              <div class="img-card"><img src="../../Assest/Image Novel/3819901-352-k318054 1.png" alt=""></div>
+              <p>Lorem ipsum dolor</p>
+              <div class="saved-icon"><a href=""><img src="../../Assest/icon/save-instagram.png" alt=""></a></div>
+            </div> <!--End Card-->
+
+            <div class="card">
+              <div class="img-card"><img src="../../Assest/Image Novel/3819901-352-k318054 1.png" alt=""></div>
+              <p>Lorem ipsum dolor</p>
+              <div class="saved-icon"><a href=""><img src="../../Assest/icon/save-instagram.png" alt=""></a></div>
+            </div> <!--End Card-->
+          </div> <!--End Container-libary-tab-->
+        </div>
+        <div class="tab-pane fade" id="friend-tab-pane" role="tabpanel" aria-labelledby="friend-tab" tabindex="0">
+           <!-- Container -->
+           <div class="container-friends-tab">
+
+<?php 
+if(mysqli_num_rows($result_follow1) > 0){
+  while($row = mysqli_fetch_array($result_follow1)){
+    $id_read = $row['id_read'];
+    $sql_follow2 = "SELECT * FROM follow WHERE id_user = $id_read";
+    $result_follow2 = mysqli_query($conn, $sql_follow2);
+    if(mysqli_num_rows($result_follow2) > 0){
+      while($col = mysqli_fetch_array($result_follow2)){
+        if($row['id_user'] == $col['id_read']){
+          $sql_data_follow = "SELECT * FROM users WHERE id = $id_read";
+          $result_data_follow = mysqli_query($conn, $sql_data_follow);
+          if(mysqli_num_rows($result_data_follow)){
+            while($usr = mysqli_fetch_array($result_data_follow)){
+          ?>
+            <!-- Card -->
+            <div class="card">
+              <div class="img-card">
+                <?=profile($usr['id'], $src, $atr)?>
+              </div>
+              <div class="messange">
+                <div class="username"><p><?=$usr['user_name']?></p></div>
+                <div class="text"><?=$usr['bio']?></div>
+              </div>
+            </div> <!--End Card-->
+<?php }}}}}}}?>
+
+          </div> <!--End Container-libary-tab-->
+        </div>
         </div>
      </div>
   </div>

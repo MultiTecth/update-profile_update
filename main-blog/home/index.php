@@ -30,18 +30,40 @@
 
 
   if(isset($id)){
-    // untuk mengambil gambar 
+    // untuk mengambil gambar profile
     $src = "<img src='../../img/guest.jpg' width='50' alt='' class='rounded-circle'>";
     $atr = "alt='' width='50' class='rounded-circle'";
     $photo_profile = profile($id, $src, $atr);
+
+    $src2 = "<img src='../../img/guest.jpg' width='20' alt='' class='rounded-circle'>";
+    $atr2 = "alt='' width='20' class='rounded-circle'";
+
+    $src_thumbnail = "<img src='../../img/thumbnail/preview.png' width='115' alt='' >";
+    $atr_thumbnail = "alt='' width='115'";
     
     $sql_follow = "SELECT id_read FROM follow WHERE id_user = $id";
+
     $result_follow = mysqli_query($conn, $sql_follow);
+    $result_blog = mysqli_query($conn, $sql_follow);
+
+    if (mysqli_num_rows($result_blog) > 0) {
+      $i=0;
+      $indexFollow = array();
+      while($row = mysqli_fetch_assoc($result_blog)){
+        $follow[$i] = $row['id_read'];
+        $i++;
+      }
+      $indexFollow = array_map('intval', $follow);
+      $withComma = implode(",", $indexFollow);
+
+      $sql_blogs = "SELECT * FROM blogs WHERE id_user IN ($withComma) ORDER BY tgl_pembuatan DESC";
+      $result_blogs = mysqli_query($conn, $sql_blogs);
+    }
+
   }
 
 
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -242,26 +264,49 @@
       <div class="title">
         <h3>For You</h3>
       </div>
+
       
-      <div class="news">
-        <div class="news-title">
+<?php 
+if(isset($result_blogs)){
+  if(mysqli_num_rows($result_blogs)){?>
+      <div class="blogs">
+        <div class="blogs-title">
           <h3>FOLLOWED </h3><span class="line"></span>
         </div>
         <div class="card-container">
-          <!-- Card1 -->
-          <div class="card">
-            <div class="image"><img
-                src="../../img/assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
-                alt=""></div>
-            <div class="text">
-              <p>
-                Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
-              </p>
+<?php
+    while($row = mysqli_fetch_array($result_blogs)){
+      $id_user = $row['id_user'];
+      $sql_user = "SELECT id, user_name, email FROM users WHERE id = $id_user";
+      $result_user = mysqli_query($conn, $sql_user);
+      if(mysqli_num_rows($result_user)){
+        while($col = mysqli_fetch_array($result_user)){
+          if($col['id'] == $row['id_user']);
+?>
+          <a class="card" href="../../tweet/UpdateBerita/news.php?id=<?=$row['id']?>">
+            <div class="image">
+              <?=thumbnail($row['id'], $src_thumbnail, $atr_thumbnail)?>
             </div>
-          </div>
-          <!-- Close Card -->
-        </div> 
-      </div>
+            <div class="text">
+              <p><?=$row['description']?></p>
+              <small>
+                <?=profile($col['id'], $src2, $atr2)?>
+                <?=$col['user_name']?>
+              </small>
+            </div>
+          </a>
+<?php }}}?>
+
+</div> 
+
+
+
+
+</div>
+<?php }}?>
+
+
+
 
       <div class="news">
         <div class="news-title">
@@ -269,7 +314,7 @@
         </div>
         <div class="card-container">
           <!-- Card1 -->
-          <div class="card">
+          <a class="card" href="../../tweet/UpdateBerita/news.php">
             <div class="image"><img
                 src="../../img/assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
                 alt=""></div>
@@ -278,20 +323,20 @@
                 Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
               </p>
             </div>
-          </div>
+          </a>
 
           <!-- Card2 -->
-          <div class="card">
+          <a class="card" href="../../tweet/UpdateBerita/news.php">
             <div class="image"><img src="../../img/assets/imagenews/56-1-1628768698 1.png" alt=""></div>
             <div class="text">
               <p>
                 Kebijakan Politik Luar Negeri Perekonomian Indonesia
               </p>
             </div>
-          </div>
+          </a>
 
           <!-- Card3 -->
-          <div class="card">
+          <a class="card" href="../../tweet/UpdateBerita/news.php">
             <div class="image"><img
                 src="../../img/assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png"
                 alt=""></div>
@@ -300,18 +345,18 @@
                 Ramai-ramai Tolak Timnas Israel ke Indonesiah
               </p>
             </div>
-          </div>
+          </a>
           <!-- Close Card -->
         </div> <!-- Closing tag container card -->
       </div>
         
       <div class="novel">
         <div class="novel-title">
-          <h3>NOVEl </h3><span class="line"></span>
+          <h3>NOVEL</h3><span class="line"></span>
         </div>
         <div class="card-container">
           <!-- Card1 -->
-          <div class="card">
+          <a class="card" href="../../tweet/UpdateBerita/news.php">
             <div class="image"><img
                 src="../../img/assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
                 alt=""></div>
@@ -320,20 +365,20 @@
                 Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
               </p>
             </div>
-          </div>
+          </a>
 
           <!-- Card2 -->
-          <div class="card">
+          <a class="card" href="../../tweet/UpdateBerita/news.php">
             <div class="image"><img src="../../img/assets/imagenews/56-1-1628768698 1.png" alt=""></div>
             <div class="text">
               <p>
                 Kebijakan Politik Luar Negeri Perekonomian Indonesia
               </p>
             </div>
-          </div>
+          </a>
 
           <!-- Card3 -->
-          <div class="card">
+          <a class="card" href="../../tweet/UpdateBerita/news.php">
             <div class="image"><img
                 src="../../img/assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png"
                 alt=""></div>
@@ -342,7 +387,7 @@
                 Ramai-ramai Tolak Timnas Israel ke Indonesiah
               </p>
             </div>
-          </div>
+          </a>
           <!-- Close Card -->
         </div> <!-- Closing tag container card -->
       </div>
@@ -350,11 +395,11 @@
 
       <div class="short-story">
         <div class="short-story-title">
-          <h3>Short Story</h3><span class="line"></span>
+          <h3>SHORT STORY</h3><span class="line"></span>
         </div>
         <div class="card-container">
           <!-- Card1 -->
-          <div class="card">
+          <a class="card" href="../../tweet/UpdateBerita/news.php">
             <div class="image"><img
                 src="../../img/assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
                 alt=""></div>
@@ -363,20 +408,20 @@
                 Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
               </p>
             </div>
-          </div>
+          </a>
 
           <!-- Card2 -->
-          <div class="card">
+          <a class="card" href="../../tweet/UpdateBerita/news.php">
             <div class="image"><img src="../../img/assets/imagenews/56-1-1628768698 1.png" alt=""></div>
             <div class="text">
               <p>
                 Kebijakan Politik Luar Negeri Perekonomian Indonesia
               </p>
             </div>
-          </div>
+          </a>
 
           <!-- Card3 -->
-          <div class="card">
+          <a class="card" href="../../tweet/UpdateBerita/news.php">
             <div class="image"><img
                 src="../../img/assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png"
                 alt=""></div>
@@ -385,7 +430,7 @@
                 Ramai-ramai Tolak Timnas Israel ke Indonesiah
               </p>
             </div>
-          </div>
+          </a>
           <!-- Close Card -->
         </div> <!-- Closing tag container card -->
       </div> <!-- Closing tag Short Story -->

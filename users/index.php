@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include "../login/db_conn.php";
+include "../function.php";
 
 if(!(isset($_SESSION["id"]) && $_SESSION["id"] != "guest")){
   header("location: ../main-blog/home/index.php");

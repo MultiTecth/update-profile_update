@@ -1,0 +1,19 @@
+.input-profil{
+    width:100%;
+}
+.input-profil label{
+    display: inline-block;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin:0 auto;
+}
+.input-profil label img{
+    opacity:0;
+    width:100px;
+}
+.input-profil label img:hover{
+    opacity:0.60;
+    transition:1.5s;
+}

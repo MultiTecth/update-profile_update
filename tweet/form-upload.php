@@ -76,6 +76,7 @@ $atr = "alt='' width='50' class='rounded-circle'";
 
       <h2>Buat Postingan Baru</h2>
       <center><div class="line"></div></center>
+
       <div class="content-box">
         <div class="btn-upload">
           <!-- <input type="file" name="fileupload" id="img"> -->
@@ -90,6 +91,7 @@ $atr = "alt='' width='50' class='rounded-circle'";
             
           </button>
         </div>
+        
         <div class="post-page">
           <div class="profil">
             <div class="profil-container">

@@ -71,6 +71,30 @@ body{
     padding: 10px;
     background-color:#3868ac84;
 }
+
+.blogs{
+    padding:10px;
+    border-radius:5px;
+}
+.blogs .blogs-title h3{
+    letter-spacing:3px;
+    font-size:25px;
+    font-weight:400;
+}
+.blogs .blogs-title{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    justify-content:center;
+}
+.blogs .blogs-title .line{
+    float: right;
+    width: 85%;
+    height: 1px;
+    border: 1px solid #275FB2;
+}
+
+
 .news{
     padding:10px;
     border-radius:5px;
@@ -92,6 +116,21 @@ body{
     height: 1px;
     border: 1px solid #275FB2;
 }
+
+.card-container {
+    height: 390px;
+    overflow: scroll;
+}
+
+.card-container a {
+    color: #fff;
+    text-decoration: none;
+}
+.card-container a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
 .card-container .card{
     margin: 10px;
     padding-right:20px;
@@ -143,7 +182,7 @@ body{
     /* border-radius:5px; */
 }
 .short-story .short-story-title h3{
-    letter-spacing:3px;
+    /* letter-spacing:3px; */
     font-size:25px;
     font-weight:400;
 }
@@ -155,7 +194,7 @@ body{
 }
 .short-story .short-story-title .line{
     float: right;
-    width: 75%;
+    width: 70%;
     height: 1px;
     border: 1px solid #275FB2;
 }
