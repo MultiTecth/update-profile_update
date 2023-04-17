@@ -21,7 +21,7 @@ body{
     width: 100% !important;
     height: 15em !important;
     background-position: center !important;
-    background-image: url("https://i.pinimg.com/564x/45/c0/50/45c050020a29e4e7869f17bfab23eade.jpg") !important;
+    background-size: cover;
 }
 .jumbotron .navbar{
     /* height:70px; */

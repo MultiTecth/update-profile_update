@@ -4,6 +4,12 @@
     box-sizing: border-box;
     list-style: none;
 }
+
+a, a:hover {
+    text-decoration: none !important;
+    color: #fff !important;
+}
+
 body{
     background-image:linear-gradient(#275FB2,#001209);
     background-position: center;
@@ -33,6 +39,12 @@ body{
     /* border: 1px solid rgb(0, 255, 76); */
     padding: 10px;
 }
+
+.card-container-left, .card-container-right {
+    max-height: 310px;
+    overflow: scroll;
+}
+
 .card-container-left .card{
     margin: 10px;
     padding:10px;
@@ -118,7 +130,7 @@ body{
 }
 
 .card-container {
-    height: 390px;
+    max-height: 390px;
     overflow: scroll;
 }
 
@@ -218,7 +230,6 @@ body{
     height: fit-content;
 }
 .card-container-right img{
-    width: 50px;
     border-radius: 1px;
     object-fit: cover;
 }

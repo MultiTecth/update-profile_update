@@ -108,7 +108,7 @@ $atr = "alt='' width='50' class='rounded-circle'";
               <h4>Title</h4>
 
               <!-- title -->
-              <input type="text" placeholder="Untitled Story" name="title" id="title">
+              <input type="text" placeholder="Untitled Story" name="title" id="title" autocomplete="off">
 
             </div>
           </div>
@@ -121,19 +121,23 @@ $atr = "alt='' width='50' class='rounded-circle'";
             </div>
           </div>
           <div class="category">
+
             <h4>Category</h4>
-            <div class="dropdown">
-              <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown button
-              </button>
-              <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item active" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
-              </ul>
-            </div>
+              <!-- 
+              <button class="dropbtn">Pilih Opsi <i class="fas fa-chevron-down"></i></button>
+              <div class="dropdown-content">
+                <a href="#opsi1"> Opsi 1</a>
+                <a href="#opsi2"> Opsi 2</a>
+                <a href="#opsi3"> Opsi 3</a>
+              </div> -->
+
+
+              <select name="genre" class="dropdown-content">
+                <option value="">Pilih Opsi</option>
+                <option value="news">News</option>
+                <option value="novel">Novel</option>
+                <option value="short_story">Short Story</option>
+              </select>
           </div>
     </form>
       <div class="tags">
@@ -150,7 +154,10 @@ $atr = "alt='' width='50' class='rounded-circle'";
     </div>
   </footer>
   <!-- SCRIPT -->
-  <script src="../ckeditor/ckeditor.js"></script>
+  <script src="../bantuan/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+  <script src="../bantuan/ckeditor5/build/ckeditor5-dll.js"></script>
+
+  <!-- <script src="../ckeditor/ckeditor.js"></script> -->
   <script>
     ClassicEditor
     .create( document.querySelector( '#editor' ), {
@@ -179,7 +186,73 @@ $atr = "alt='' width='50' class='rounded-circle'";
       console.error( error );
     });
   </script>
+  <script>
+    const express = require('express');
+    const app = express();
+    const multer = require('multer');
+    const path = require('path');
+
+    // Konfigurasi multer untuk meng-handle upload file
+    const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'public/upload/'); // Folder penyimpanan gambar
+    },
+    filename: (req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      const fileExtension = path.extname(file.originalname);
+      cb(null, file.fieldname + '-' + uniqueSuffix + fileExtension);
+    }
+    });
+
+    const upload = multer({ storage });
+
+    // Endpoint untuk meng-handle upload gambar
+    app.post('/upload', upload.single('upload'), (req, res) => {
+    res.json({
+      url: `/upload/${req.file.filename}` // URL gambar yang diupload untuk ditampilkan di CKEditor
+    });
+    });
+
+    // Konfigurasi folder statis untuk menyajikan gambar yang telah diupload
+    app.use(express.static('public'));
+
+    // Buat folder 'public/upload' jika belum ada
+    const fs = require('fs');
+    const uploadFolder = path.join(__dirname, 'public/upload');
+    if (!fs.existsSync(uploadFolder)) {
+    fs.mkdirSync(uploadFolder);
+    }
+
+    // Start server
+    app.listen(3000, () => {
+    console.log('Server berjalan pada http://localhost:3000');
+    });
+
+    // Tambahkan event listener untuk menutup dropdown saat klik di luar dropdown
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.style.display === 'block') {
+            openDropdown.style.display = 'none';
+          }
+        }
+      }
+    }
+
+    // Tambahkan event listener untuk membuka dan menutup dropdown saat tombol dropdown diklik
+    var dropdown = document.getElementsByClassName("dropdown")[0];
+    dropdown.addEventListener("click", function() {
+      this.getElementsByClassName("dropdown-content")[0].style.display = "block";
+    });
+
+  </script>
+  <script src="../bantuan/ckeditor5/src/upload.js"></script>
+  <script src="../bantuan/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
   <script src="../bantuan/base-component.js"></script>
+  <script src="../bantuan/bootstrap.bundle.min.js"></script>
+
 
   
 <script src="../bantuan/jquery.min.js"></script>

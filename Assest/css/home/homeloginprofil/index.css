@@ -114,7 +114,7 @@ body{
     border: none;
     border-radius: 5px;
     outline:none;
-    text-algin:center;
+    text-align:center;
 }
 .search-dropdown {
     position: absolute;
@@ -139,12 +139,12 @@ body{
     cursor: pointer;
 }
 .search-dropdown-item h6{
-    text-algin:center;
+    text-align:center;
     padding:0.50em;
     background:#0C2245;
 }
 .search-dropdown-item ul a{
-    text-algin:left;
+    text-align:left;
     color:white;
     text-decoration:none;
     z-index:9000;

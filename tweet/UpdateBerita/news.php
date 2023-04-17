@@ -1,8 +1,11 @@
 <?php 
+
+
 session_start();
 include '../../function.php';
 
 $id = $_GET['id'];
+
 
 $src = "<img src='../../img/guest.jpg' width='50' alt='' class='rounded-circle'>";
 $atr = "alt='' width='50' class='rounded-circle'";
@@ -13,7 +16,6 @@ $atr_user = "class='rounded-circle'";
 
 $src2 = "<img src='../../img/thumbnail/preview.png' alt='' width='70%' height='70%'>";
 $atr2 = "alt='' width='70%' height='70%'";
-
 
 
 $sql = "SELECT * FROM blogs WHERE id = $id";
@@ -27,6 +29,21 @@ if(mysqli_num_rows($result) === 1){
   $result_user = mysqli_query($conn, $sql_user);
   $col = mysqli_fetch_assoc($result_user);
 
+  if(isset($_SESSION['login'])){
+    if(isset($_POST['favorite'])){
+      $date = date('Y-m-d H:i:s');
+      $id_user = $_SESSION['id'];
+      $sql_favorite = "INSERT INTO favorite (id_blogs, id_user, tgl_buat) 
+      VALUES ($id, $id_user, '$date')";
+      mysqli_query($conn, $sql_favorite);
+    } 
+    if(isset($_POST['unfavorite'])){
+      $id_user = $_SESSION['id'];
+      $sql_favorite = "DELETE FROM favorite WHERE id_blogs = $id && id_user = $id_user";
+      mysqli_query($conn, $sql_favorite);
+    }
+  }
+
 ?>
 
 
@@ -36,7 +53,7 @@ if(mysqli_num_rows($result) === 1){
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung</title>
+  <title><?=$row['title']?></title>
   <!-- <link rel="stylesheet" href="../../Assest/css/uploadkontent/all.css"> -->
   <link rel="stylesheet" href="../../Assest/css/uploadkontent/all.css">
   <link rel="stylesheet" href="../../bantuan/bootstrap.min.css">
@@ -92,6 +109,8 @@ if(mysqli_num_rows($result) === 1){
           <script src="./assest/index.js"></script>
           <a href="../form-upload.php"><button class="tweet-btn">Tweet</button></a>
         </div>
+        
+        <?php if(isset($_SESSION["login"])){?>
         <div class="profil">
           <div class="dropdown">
             <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -107,7 +126,7 @@ if(mysqli_num_rows($result) === 1){
                 </span>
               </div>
               <li>
-                <a class="dropdown-item" href="../../../Profil/profilpage/index.html">
+                <a class="dropdown-item" href="../../users/">
                   <button>
                     <div class="user-icon">
                       <img src="../../img/assets/user.png">
@@ -124,12 +143,14 @@ if(mysqli_num_rows($result) === 1){
                   </button>
                 </a>
               </li>
-              <li class="dropdown-item" href="">
-                <button>
-                  <div class="rotate">
-                    <img src="../../img/assets/rotate.png">
-                  </div>Change Account
-                </button>
+              <li>
+                <a class="dropdown-item" href="../../login/change_acc.php">
+                  <button>
+                    <div class="rotate">
+                      <img src="../../img/assets/rotate.png">
+                    </div>Change Account
+                  </button>
+                </a>
               </li>
               <li class="dropdown-item">
                 <a href="../../../Register/login_me/login.html">
@@ -143,6 +164,32 @@ if(mysqli_num_rows($result) === 1){
             </ul>
           </div>
         </div>
+        <!-- Belum login --> 
+        <?php } else {?>
+
+        <!-- Profile Guest -->
+        <div class="profil">
+          <div class="dropdown">
+            <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <img src="../../img/guest.jpg" alt="" width="50"
+                class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu">
+              <div class="profil-picture">
+                <img src="../../img/guest.jpg" alt="" width="50"
+                  class="rounded-circle">
+                <span class="username">
+                  <h4>Guest</h4>
+                </span>
+              </div>
+              <li><a class="dropdown-item" href="../../login/index.php"><button>Login</button></a></li>
+              <li><a class="dropdown-item" href="../../login/register.php"><button>SignUp</button></a></li>  
+            </ul>
+          </div>
+        </div> 
+        <!-- Akhir Profile Guest -->
+        <?php }?>
       </div>
     </div>
   </div>
@@ -151,7 +198,7 @@ if(mysqli_num_rows($result) === 1){
     <div class="box">
       <a href="../../main-blog/home/">
         <div class="icon-back"><img src="../../img/Expand_left_double.png" alt="">
-        <h3>Back</h3></div>
+        Back</div>
       </a>
     </div> 
   </a>
@@ -168,7 +215,21 @@ if(mysqli_num_rows($result) === 1){
               </span>
             </div>
           </div><!--home tab profile end-->
-          <span class="icon-sv"><img src="../../../Assest/icon/save-instagram.png" alt=""></span>
+          <?php if(isset($_SESSION["login"])):?>
+          <span class="icon-sv">
+            <form action="" method="post">
+        <?php if(mysqli_num_rows(checkfavorite($id, $_SESSION['id'])) === 1){?>
+              <button type="submit" name="unfavorite">
+                <img src="../../Assest/icon/save.png" width="40">
+              </button>
+        <?php } else {?>
+              <button type="submit" name="favorite">
+                <img src="../../Assest/icon/Bookmark.png" width="40">
+              </button>
+        <?php }?>
+            </form>
+          </span>
+          <?php endif;?>
         </div>
         <div class="post-content">
           <p id="text"><?=$row['title']?></p>

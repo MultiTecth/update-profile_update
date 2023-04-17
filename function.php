@@ -111,4 +111,11 @@ function checkfollow($id_1, $id_2){
   return mysqli_query($conn, $sql);
 }
 
+function checkfavorite($id_blogs, $id_user){
+  global $conn;
+  $sql_cf = "SELECT * FROM favorite WHERE id_blogs = $id_blogs AND id_user = $id_user";
+  return mysqli_query($conn, $sql_cf);
+}
+
+
 ?>

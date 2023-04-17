@@ -9,6 +9,7 @@
   align-items: center;
   /* row-gap: 20px; */
   /* padding: 20px; */
+  color: #fff;
 }
 
 .jumbotron .navbar .nav-menu{
@@ -88,6 +89,7 @@
 .more-menu .search{
   background-color:#022865;
   border-radius: 5px;
+  color: white;
   /* padding:3px; */
 }
 .more-menu .search img{
@@ -103,6 +105,7 @@
   background-color:transparent;
   border:none;
   outline:none;
+  color: white;
 }
 ::placeholder{
   color:white;

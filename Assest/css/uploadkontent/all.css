@@ -113,7 +113,7 @@ body{
     border: none;
     border-radius: 5px;
     outline:none;
-    text-algin:center;
+    text-align:center;
 }
 
 .search-dropdown {
@@ -144,7 +144,7 @@ body{
 
 .search-dropdown-item h6{
     width:100px;
-    text-algin:center;
+    text-align:center;
     padding:0.30em;
     background:#0C2245;
 }
@@ -154,7 +154,7 @@ body{
     border:none;
 }
 .search-dropdown-item ul li > a{
-    text-algin:left !important;
+    text-align:left !important;
     color:white;
     text-decoration:none;
 }
@@ -247,7 +247,8 @@ body{
 }
 .box{
     display:flex;
-    algin-items:center;
+    text-align: center;
+    font-size: 35px;
 }
 .box > img{
     width:7em;
@@ -256,16 +257,30 @@ a{
     color:white;
     text-decoration:none;
 }
+.box a {
+    color: white;
+    text-decoration: none;
+}
+.box a:hover {
+    color: white;
+    text-decoration: none;
+}
 .bar-container{
     display:flex;
     justify-content:space-between;
-    algin-items:center;
+    text-align: center;
     /* padding-right:10em; */
 }
 .bar-container .icon-sv > img{
     width:3em;
     object-fit:cover;
 }
+
+.bar-container .icon-sv button {
+    background-color: rgba(0, 0, 0, .0);
+    border: none;
+}
+
 .post-page-container{
     margin-top:2em;
     width:300px;
@@ -315,7 +330,7 @@ a{
     color:white;
 }
 .post-content span > img{
-    text-algin:center;
+    text-align:center;
     border-radius:5px;
     object-fit:cover;
 }

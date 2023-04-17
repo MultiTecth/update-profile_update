@@ -43,6 +43,7 @@
     
     $sql_follow = "SELECT id_read FROM follow WHERE id_user = $id";
 
+    // ini untuk menampilkan blogs teman 
     $result_follow = mysqli_query($conn, $sql_follow);
     $result_blog = mysqli_query($conn, $sql_follow);
 
@@ -59,6 +60,13 @@
       $sql_blogs = "SELECT * FROM blogs WHERE id_user IN ($withComma) ORDER BY tgl_pembuatan DESC";
       $result_blogs = mysqli_query($conn, $sql_blogs);
     }
+
+    
+    $sql_favorite = "SELECT * FROM favorite WHERE id_user = $id ORDER BY tgl_buat DESC";
+    $result_favorite = mysqli_query($conn, $sql_favorite);
+    
+    $src2_mini = "<img src='../../img/thumbnail/preview.png' alt='' width='80'>";
+    $atr2_mini = "alt='' width='80'";
 
   }
 
@@ -275,12 +283,12 @@ if(isset($result_blogs)){
         </div>
         <div class="card-container">
 <?php
-    while($row = mysqli_fetch_array($result_blogs)){
+    while($row = mysqli_fetch_assoc($result_blogs)){
       $id_user = $row['id_user'];
       $sql_user = "SELECT id, user_name, email FROM users WHERE id = $id_user";
       $result_user = mysqli_query($conn, $sql_user);
       if(mysqli_num_rows($result_user)){
-        while($col = mysqli_fetch_array($result_user)){
+        while($col = mysqli_fetch_assoc($result_user)){
           if($col['id'] == $row['id_user']);
 ?>
           <a class="card" href="../../tweet/UpdateBerita/news.php?id=<?=$row['id']?>">
@@ -288,7 +296,7 @@ if(isset($result_blogs)){
               <?=thumbnail($row['id'], $src_thumbnail, $atr_thumbnail)?>
             </div>
             <div class="text">
-              <p><?=$row['description']?></p>
+              <p><?=$row['title']?></p>
               <small>
                 <?=profile($col['id'], $src2, $atr2)?>
                 <?=$col['user_name']?>
@@ -444,24 +452,33 @@ if(isset($result_blogs)){
       </div>
       <div class="content">
         <div class="card-container-right">
-          <!-- Card1 -->
-          <!-- <div class="card">
-            <div class="image"><img src="../assets/savedprofil/203677881-416-k974890 1.png" alt=""></div>
-            <div class="text">
-              <p>
-                The baby swap
-              </p>
-            </div>
-          </div> -->
 
-          <!-- Card2 -->
-          <!-- <div class="card">
-            <div class="image"><img src="../assets/savedprofil/267373976-352-k308139 1.png" alt=""></div>
+<?php 
+if(isset($result_favorite)){
+  if(mysqli_num_rows($result_favorite) > 0){
+    $i=0;
+    while($row = mysqli_fetch_assoc($result_favorite)){
+      $iArrayLoop[$i] = $row['id_blogs'];
+      $i++;
+    }
+    for($i=0; $i< sizeof($iArrayLoop); $i++){
+      $id_favorite_blogs = $iArrayLoop[$i];
+      $sql_blogs_favorite = "SELECT * FROM blogs WHERE id = $id_favorite_blogs";
+      $result_blogs_favorite = mysqli_query($conn, $sql_blogs_favorite);
+      while($row_blogs_favorite = mysqli_fetch_assoc($result_blogs_favorite)){
+?>
+          <a class="card" href="../../tweet/UpdateBerita/news.php?id=<?=$row_blogs_favorite['id']?>">
+            <div class="image">
+            <?=thumbnail($row_blogs_favorite['id'], $src2_mini, $atr2_mini)?>
+            </div>
             <div class="text">
-              <p>
-                His Defiant Concubine
-              </p>
-            </div> -->
+              <h4><?=$row_blogs_favorite['title']?></h4>
+            </div>
+          </a>
+<?php }}}}?>
+
+
+
           </div><!-- Close Card -->
         </div> <!-- Closing tag container card -->
       </div>

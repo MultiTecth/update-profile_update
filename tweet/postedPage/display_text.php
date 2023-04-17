@@ -7,7 +7,7 @@ $sql_blogs = "SELECT * FROM blogs ORDER BY tgl_pembuatan DESC";
 $result_blogs = mysqli_query($conn, $sql_blogs);
 
 $src = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
-$src2 = "<img src='../../img/thumbnail/contoh.jpg' alt='' width='100%' height='100%'>";
+$src2 = "<img src='../../img/thumbnail/preview.png' alt='' width='100%' height='100%'>";
 $atr = "alt='' width='50' class='rounded-circle'";
 $atr2 = "alt='' width='100%' height='100%'";
 ?>
@@ -112,7 +112,7 @@ $atr2 = "alt='' width='100%' height='100%'";
         </div>
       </div>
     </div>
-    <div class="jmb-container"></div>
+    <div class="jmb-container" style="background-image: url('../../img/assets/background.jpg');"></div>
   </div>
   </div>
 
