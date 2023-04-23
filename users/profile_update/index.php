@@ -37,6 +37,7 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
   <title>Edit Profil</title>
   <link rel="stylesheet" href="./assets/root.css">
   <link rel="stylesheet" href="../../bantuan/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/nav.css">
 </head>
 
 <body>
@@ -44,7 +45,6 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
     alert('<?=$_GET['error']?>');
   </script>
   <div class="jumbotron">
-    <link rel="stylesheet" href="./assets/nav.css">
     <div class="navbar">
       <div class="nav-menu">
         <div class="text">
@@ -58,20 +58,21 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['id']) && $_SESSION['id'] !=
         </div>
       </div>
     </div>
-  <div class="jmb-container" style='background-image: url("../../img/background.jpg")'>
-    <div class="input-profil">
-      <link rel="stylesheet" href="./assets/input-profil.css">
-      <input type="file" id="upload" hidden/>
-      <center> <label for="upload"><img src="./assets/img/icon/Subtract.png" alt=""></label></center>
-    </div>
-  </div>
-
-  <div class="back">
-    <a href="../@<?=$uname?>"><img src="./assets/img/icon/Back.png" alt=""></a>
-    <!-- <span class="back">Back</span> -->
-  </div>
-
+  
   <form action="update.php" method="post" enctype="multipart/form-data">
+    <div class="jmb-container" style='background-image: url("../../img/background.jpg")'>
+      <div class="input-profil">
+        <link rel="stylesheet" href="./assets/input-profil.css">
+        <input type="file" id="upload" hidden/>
+        <label for="upload"><img src="./assets/img/icon/Subtract.png" alt=""></label></center>
+      </div>
+    </div>
+
+    <div class="back">
+      <a href="../@<?=$uname?>"><img src="./assets/img/icon/Back.png" alt=""></a>
+      <!-- <span class="back">Back</span> -->
+    </div>
+
     <div class="container-content">
       <div class="profil-information">
       <link rel="stylesheet" href="./assets/profil-information.css">

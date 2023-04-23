@@ -50,6 +50,10 @@ body{
     /* row-gap: 20px; */
     /* padding: 20px; */
 }
+.jumbotron .navbar {
+    height: 80px;
+}
+
 .jumbotron .navbar .nav-menu{
     /* border: 1px solid white; */
     display:grid;

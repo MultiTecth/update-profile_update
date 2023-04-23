@@ -10,6 +10,7 @@
   /* row-gap: 20px; */
   /* padding: 20px; */
   color: #fff;
+  height: 80px;
 }
 
 .jumbotron .navbar .nav-menu{
@@ -105,7 +106,7 @@
   background-color:transparent;
   border:none;
   outline:none;
-  color: white;
+  color: white; 
 }
 ::placeholder{
   color:white;
